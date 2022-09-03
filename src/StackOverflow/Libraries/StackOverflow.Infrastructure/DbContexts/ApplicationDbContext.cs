@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StackOverflow.Infrastructure.Entities.Membership;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StackOverflow.Infrastructure.Seeds;
 
 namespace StackOverflow.Infrastructure.DbContexts
 {
