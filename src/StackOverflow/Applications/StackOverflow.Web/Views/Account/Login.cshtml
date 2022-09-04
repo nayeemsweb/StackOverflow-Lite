@@ -14,14 +14,14 @@
 	</style>
 }
 
-<form class="user-form needs-validation" novalidate>
+<form class="user-form needs-validation" novalidate asp-area="" asp-controller="Account" asp-action="Login" method="post">
 	<div class="row">
-		<h2 class="text-center">Login</h2>
-		
+		<h2 class="text-center">@ViewData["Title"]</h2>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="col-12">
 			<div class="form-group">
-				<label for="validationCustom01">Email</label>
-				<input asp-for="Email" class="form-control" type="email" name="name" id="validationCustom01" required>
+				<label class="form-label" for="emailValidation">Email</label>
+				<input asp-for="Email" class="form-control" type="email" name="name" id="emailValidation" required>
 				<div class="valid-feedback">
 					Looks good!
 				</div>
@@ -30,8 +30,9 @@
 			
 		<div class="col-12">
 			<div class="form-group">
-				<label for="validationCustom02">Password</label>
-					<input asp-for="Password" class="form-control" type="password" name="password" id="validationCustom02" required>
+				<label class="form-label" for="passwordValidation">Password</label>
+				<input asp-for="Password" class="form-control" type="password" name="password" 
+				id="passwordValidation" minlength="6" required>
 				<div class="valid-feedback">
 					Looks good!
 				</div>
@@ -54,5 +55,6 @@
 
 @section Scripts
 {
+	<partial name="_ValidationScriptsPartial" />
 	<script src="~/pify/assets/js/disableFormSubmission.js"></script>
 }
