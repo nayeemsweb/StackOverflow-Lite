@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="zxx">
+<html lang="en">
     
 <head>
 	<!-- Required meta tags -->
@@ -45,7 +45,7 @@
 			<div class="container">
 				<div class="mobile-responsive-menu">
 					<div class="logo">
-						<a href="index.html">
+						<a asp-area="" asp-controller="Home" asp-action="Index">
 							<img src="~/pify/assets/images/logo.png" alt="logo">
 						</a>
 					</div>
@@ -56,14 +56,14 @@
 		<div class="desktop-nav">
 			<div class="container">
 				<nav class="navbar navbar-expand-md navbar-light">
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
 						<img src="~/pify/assets/images/logo.png" alt="logo">
 					</a>
 
 					<div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 						<ul class="navbar-nav m-auto">
 							<li class="nav-item">
-								<a href="index.html" class="nav-link active">
+								<a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link active">
 									Home 
 								</a>
 							</li>
