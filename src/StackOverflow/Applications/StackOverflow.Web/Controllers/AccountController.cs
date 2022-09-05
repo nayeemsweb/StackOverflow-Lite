@@ -45,7 +45,7 @@ namespace StackOverflow.Web.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    DisplayName = model.DisplayName,
+                    UserName = model.DisplayName,
                     Email = model.Email,
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using StackOverflow.Infrastructure.Entities.Membership;
 
 namespace StackOverflow.Infrastructure.DbContexts
 {
     public interface IApplicationDbContext
     {
+        DbSet<ApplicationUser>? ApplicationUsers { get; set; }
     }
 }

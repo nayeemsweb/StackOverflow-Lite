@@ -2,7 +2,6 @@ using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using StackOverflow.Web.Data;
 using Serilog;
 using Serilog.Events;
 using StackOverflow.Infrastructure;
@@ -10,6 +9,10 @@ using StackOverflow.Membership;
 using System.Reflection;
 using StackOverflow.Infrastructure.Entities.Membership;
 using StackOverflow.Membership.Services;
+using StackOverflow.Infrastructure.Profiles;
+using StackOverflow.Membership.Profiles;
+using StackOverflow.Infrastructure.Seeds;
+using StackOverflow.Infrastructure.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +21,7 @@ var assemblyName = Assembly.GetExecutingAssembly().FullName!;
 
 //Autofac Configuration
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => 
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new WebModule());
     containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName));
@@ -26,11 +29,15 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 });
 
 // Add services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
+builder.Services.
+    AddDbContext<ApplicationDbContext>(
+    options => options.UseSqlServer(connectionString,
+    b => b.MigrationsAssembly(assemblyName)));
 
 builder.Services
     .AddIdentity<ApplicationUser, Role>()
@@ -39,7 +46,6 @@ builder.Services
     .AddRoleManager<RoleManager>()
     .AddSignInManager<SignInManager>()
     .AddDefaultTokenProviders();
-
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
