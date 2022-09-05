@@ -6,10 +6,13 @@ namespace StackOverflow.Web.Models.Account
     public class LoginModel
     {
         [Required]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email address.")]
         [EmailAddress]
         public string? Email { get; set; }
 
         [Required]
+        [StringLength(16, MinimumLength = 6,
+            ErrorMessage = "Password should be within 6 to 16 characters long. Use strong password.")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
