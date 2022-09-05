@@ -7,6 +7,9 @@ namespace StackOverflow.Web.Models.Account
     public class RegisterModel
     {
         [Required]
+        [StringLength(20, MinimumLength = 1, 
+            ErrorMessage = "Display Name should be within 1 to 20 characters long.")]
+        [DataType(DataType.Text)]
         [Display(Name = "Display Name")]
         public string? DisplayName { get; set; }
 

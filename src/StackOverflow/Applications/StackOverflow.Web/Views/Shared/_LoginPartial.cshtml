@@ -3,16 +3,17 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
 @if (SignInManager.IsSignedIn(User))
 {
     <li>
-        <a asp-area="" asp-controller="" asp-action="" title="Manage">Hello @User.Identity?.Name!</a>
+        <a class="d-flex text-white active" asp-area="" asp-controller="" asp-action="" title="My Profile">
+            Hello @User.Identity.Name
+        </a>
     </li>
     <li >
-        <form class="form-inline" asp-area="" asp-controller="" asp-action="" 
+        <form class="form-inline" asp-area="" asp-controller="Account" asp-action="Logout" method="post" 
         asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <a  type="submit">Logout</a>
+            <button type="submit" class="custom-button active"> Logout</button>
         </form>
     </li>
 }

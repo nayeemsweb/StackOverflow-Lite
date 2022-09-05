@@ -6,7 +6,7 @@ namespace StackOverflow.Web.Models.Account
     public class LoginModel
     {
         [Required]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email address.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email address!")]
         [EmailAddress]
         public string? Email { get; set; }
 

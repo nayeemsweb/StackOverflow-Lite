@@ -14,7 +14,7 @@
 	</style>
 }
 
-	<form class="user-form needs-validation" novalidate id="account" method="post" 
+<form class="user-form needs-validation" novalidate id="account" method="post" 
 	asp-area="" asp-controller="Account" asp-action="Login">
 	<div class="row">
 		<h2 class="text-center">@ViewData["Title"]</h2>
@@ -25,7 +25,7 @@
 				<input asp-for="Email" class="form-control" type="email" 
 				autocomplete="username" id="emailValidation" required>
 				<div class="invalid-feedback">
-					Looks good!
+						Invalid Email address!
 				</div>
 			</div>
 		</div>

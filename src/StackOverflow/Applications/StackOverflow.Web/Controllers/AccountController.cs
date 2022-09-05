@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Infrastructure.Entities.Membership;
 using StackOverflow.Web.Models.Account;
@@ -37,17 +38,17 @@ namespace StackOverflow.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            model.ReturnUrl ??= Url.Content("~/");
-            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync())
-                .ToList();
+            model.ReturnUrl ??= Url.Action("Index", "Home");
 
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.DisplayName,
+                    UserName = model.Email,
                     Email = model.Email,
+                    DisplayName = model.DisplayName,                    
                 };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -55,6 +56,9 @@ namespace StackOverflow.Web.Controllers
                     await _userManager.AddToRolesAsync(user, new string[] { "User" });
 
                     _logger.LogInformation("User created a new account with password.");
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(model.ReturnUrl!);
                 }
                 
                 foreach (var error in result.Errors)
@@ -98,8 +102,6 @@ namespace StackOverflow.Web.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, false);
                 if (result.Succeeded)
                 {
