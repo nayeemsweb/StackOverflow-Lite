@@ -1,4 +1,5 @@
 ﻿using StackOverflow.Infrastructure.Data;
+using StackOverflow.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace StackOverflow.Infrastructure.UnitOfWorks
 {
     public interface IStackOverflowUnitOfWork : IUnitOfWork
     {
+        public IPostRepository PostRepository { get; set; }
     }
 }
