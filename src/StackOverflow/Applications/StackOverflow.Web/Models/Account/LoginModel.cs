@@ -13,7 +13,7 @@ namespace StackOverflow.Web.Models.Account
         [Required]
         [StringLength(16, MinimumLength = 6,
             ErrorMessage = "Password should be within 6 to 16 characters long. Use strong password.")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password, ErrorMessage = "Wrong Password!")]
         public string? Password { get; set; }
 
         public IList<AuthenticationScheme>? ExternalLogins { get; set; }
