@@ -5486,3 +5486,19 @@ Page-navigation Area Style*/
   background-color: #f48225;
 }
 /*# sourceMappingURL=style.css.map */
+
+.custom-button {
+    border: 1px solid #f48225;
+    display: inline-block;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #878787;
+    transition: all linear 0.3s;
+    background: transparent;
+}
+
+.custom-button:hover {
+    background-color: #f48225;
+    border-color: #f48225;
+}

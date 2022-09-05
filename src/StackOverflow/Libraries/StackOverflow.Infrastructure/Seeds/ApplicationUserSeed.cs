@@ -1,9 +1,4 @@
 ﻿using StackOverflow.Infrastructure.Entities.Membership;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StackOverflow.Infrastructure.Seeds
 {
@@ -19,9 +14,10 @@ namespace StackOverflow.Infrastructure.Seeds
                     DisplayName = "Nayeem Rahman",
                     Email = "nayeemrahman@gmail.com",
                     NormalizedEmail = "NAYEEMRAHMAN@GMAIL.COM",
-                    LockoutEnabled = true,
+                    LockoutEnabled = false,
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    PasswordHash = "123456"
                 };
 
                 return new ApplicationUser[]
