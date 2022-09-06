@@ -8,7 +8,7 @@ namespace StackOverflow.Infrastructure.Services
     public class PostService : IPostService
     {
         private readonly IStackOverflowUnitOfWork _stackOverflowUnitOfWork;
-        private readonly IMapper _mapper;
+        private IMapper _mapper;
 
         public PostService(IStackOverflowUnitOfWork stackOverflowUnitOfWork,
             IMapper mapper)

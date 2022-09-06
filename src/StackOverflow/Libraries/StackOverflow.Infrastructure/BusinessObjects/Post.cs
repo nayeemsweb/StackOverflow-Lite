@@ -1,9 +1,4 @@
-﻿using StackOverflow.Infrastructure.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StackOverflow.Infrastructure.Entities.Membership;
 
 namespace StackOverflow.Infrastructure.BusinessObjects
 {
@@ -16,5 +11,7 @@ namespace StackOverflow.Infrastructure.BusinessObjects
         public List<Comment>? Comments { get; set; }
         public List<Vote>? Votes { get; set; }
         public List<Tag>? Tags { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public Guid UserId { get; set; }
     }
 }

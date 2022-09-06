@@ -1,4 +1,5 @@
 ﻿using StackOverflow.Infrastructure.Data;
+using StackOverflow.Infrastructure.Entities.Membership;
 
 namespace StackOverflow.Infrastructure.Entities
 {
@@ -11,5 +12,7 @@ namespace StackOverflow.Infrastructure.Entities
         public List<Comment>? Comments { get; set; }
         public List<Vote>? Votes { get; set; }
         public List<Tag>? Tags { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public Guid UserId { get; set; }
     }
 }
