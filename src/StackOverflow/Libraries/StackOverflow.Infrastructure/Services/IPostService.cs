@@ -4,10 +4,11 @@ namespace StackOverflow.Infrastructure.Services
 {
     public interface IPostService
     {
-        Task CreatePost(Post post);
-        Task UpdatePost(Post Post);
-        Task DeletePostAsync(Guid id);
-        Task<(int total, int displayTotal, IList<Post> records)> GetPostsAsync(int pageIndex, int pageSize, string searchText, string orderBy);
-        Task<Post> GetPostByIdAsync(Guid id);
+        void CreatePost(Post post);
+        void UpdatePost(Post post);
+        void DeletePost(int id);
+        //(int total, int displayTotal, IList<Post> records) GetPosts(int pageIndex, int pageSize, string searchText, string orderBy);
+        Post GetPostById(int id);
+        IList<Post> GetAllPosts();
     }
 }
