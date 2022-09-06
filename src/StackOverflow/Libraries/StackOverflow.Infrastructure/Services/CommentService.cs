@@ -18,5 +18,10 @@ namespace StackOverflow.Infrastructure.Services
         {
             throw new NotImplementedException();
         }
+
+        public IList<Comment> GetAllCommentsByPostId(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
