@@ -10,5 +10,6 @@ namespace StackOverflow.Infrastructure.Services
         //(int total, int displayTotal, IList<Post> records) GetPosts(int pageIndex, int pageSize, string searchText, string orderBy);
         Post GetPostById(int id);
         IList<Post> GetAllPosts();
+        IList<Post> GetAllPostsByUserId();
     }
 }

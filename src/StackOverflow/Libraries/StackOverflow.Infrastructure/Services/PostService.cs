@@ -81,6 +81,11 @@ namespace StackOverflow.Infrastructure.Services
             return products;
         }
 
+        public IList<Post> GetAllPostsByUserId()
+        {
+            throw new NotImplementedException();
+        }
+
         //public Task<(int total, int displayTotal, IList<Post> records)>
         //    GetPosts(int pageIndex, int pageSize, string searchText, string orderBy)
         //{
