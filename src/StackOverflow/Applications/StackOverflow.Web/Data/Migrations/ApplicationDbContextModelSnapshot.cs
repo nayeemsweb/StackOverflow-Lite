@@ -30,9 +30,6 @@ namespace StackOverflow.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -50,9 +47,9 @@ namespace StackOverflow.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comment");
                 });
@@ -130,7 +127,7 @@ namespace StackOverflow.Web.Data.Migrations
                         {
                             Id = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b96eae86-15b4-4316-abaa-95ecc33deb8d",
+                            ConcurrencyStamp = "e99a3b69-9007-4d1d-ad98-5b6b64a29c97",
                             DisplayName = "Nayeem Rahman",
                             Email = "nayeemrahman@gmail.com",
                             EmailConfirmed = true,
@@ -138,7 +135,7 @@ namespace StackOverflow.Web.Data.Migrations
                             NormalizedEmail = "NAYEEMRAHMAN@GMAIL.COM",
                             PasswordHash = "123456",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f391083a-b28b-477c-9dbc-76468abcdcb4",
+                            SecurityStamp = "98483057-8564-41ad-96a7-1d913758b906",
                             TwoFactorEnabled = false
                         });
                 });
@@ -174,7 +171,7 @@ namespace StackOverflow.Web.Data.Migrations
                         new
                         {
                             Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
-                            ConcurrencyStamp = "637980820178873089",
+                            ConcurrencyStamp = "637981056532536444",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -298,9 +295,6 @@ namespace StackOverflow.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -315,9 +309,9 @@ namespace StackOverflow.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("StackOverflow.Infrastructure.Entities.Tag", b =>
@@ -352,7 +346,7 @@ namespace StackOverflow.Web.Data.Migrations
                     b.Property<int?>("CommentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PostIdId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
@@ -362,23 +356,23 @@ namespace StackOverflow.Web.Data.Migrations
 
                     b.HasIndex("CommentId");
 
-                    b.HasIndex("PostIdId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("Vote");
                 });
 
             modelBuilder.Entity("StackOverflow.Infrastructure.Entities.Comment", b =>
                 {
-                    b.HasOne("StackOverflow.Infrastructure.Entities.Membership.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("StackOverflow.Infrastructure.Entities.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StackOverflow.Infrastructure.Entities.Membership.ApplicationUser", "ApplicationUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
@@ -441,8 +435,8 @@ namespace StackOverflow.Web.Data.Migrations
                 {
                     b.HasOne("StackOverflow.Infrastructure.Entities.Membership.ApplicationUser", "ApplicationUser")
                         .WithMany("Posts")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
@@ -465,11 +459,9 @@ namespace StackOverflow.Web.Data.Migrations
                         .WithMany("Votes")
                         .HasForeignKey("CommentId");
 
-                    b.HasOne("StackOverflow.Infrastructure.Entities.Post", "PostId")
+                    b.HasOne("StackOverflow.Infrastructure.Entities.Post", null)
                         .WithMany("Votes")
-                        .HasForeignKey("PostIdId");
-
-                    b.Navigation("PostId");
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("StackOverflow.Infrastructure.Entities.Comment", b =>
@@ -479,6 +471,8 @@ namespace StackOverflow.Web.Data.Migrations
 
             modelBuilder.Entity("StackOverflow.Infrastructure.Entities.Membership.ApplicationUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Posts");
                 });
 

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using StackOverflow.Infrastructure.Entities.Membership;
+using StackOverflow.Membership.DTOs;
 
 namespace StackOverflow.Membership.Profiles
 {
@@ -6,6 +8,7 @@ namespace StackOverflow.Membership.Profiles
     {
         public MembershipProfile()
         {
+            CreateMap<UserBasicInfoDto, ApplicationUser>().ReverseMap();
         }
     }
 }

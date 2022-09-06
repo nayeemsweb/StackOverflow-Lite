@@ -6,7 +6,7 @@ namespace StackOverflow.Infrastructure.Entities
     {
         public int Id { get; set; }
         public Guid UserId { get; set; }
-        public Post? PostId { get; set; }
+        public int? PostId { get; set; }
         public int? CommentId { get; set; }
     }
 }

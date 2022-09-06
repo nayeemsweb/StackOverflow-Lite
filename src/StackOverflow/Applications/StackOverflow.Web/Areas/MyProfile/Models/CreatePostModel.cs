@@ -18,7 +18,6 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             : base(userManager, httpContextAccessor, mapper)
         {
             _postService = postService;
-            _mapper = mapper;
         }
 
         public CreatePostModel()
@@ -29,7 +28,6 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
         {
             _scope = scope;
             _postService = _scope.Resolve<IPostService>();
-            _mapper = _scope.Resolve<IMapper>();
 
             base.ResolveDependency(scope);
         }
@@ -37,8 +35,12 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
         public async Task CreatePost()
         {
             await GetUserInfoAsync();
-            var post = _mapper.Map<Post>(this);
-            post.UserId = UserInfo.Id;
+            var post = new Post
+            {
+                Title = Title,
+                Description = Description,
+                UserId = UserInfo!.Id
+            };
             _postService.CreatePost(post);
         }
 

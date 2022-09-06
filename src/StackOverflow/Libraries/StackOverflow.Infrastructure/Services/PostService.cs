@@ -2,6 +2,7 @@
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.UnitOfWorks;
 using PostEntity = StackOverflow.Infrastructure.Entities.Post;
+using PostBO = StackOverflow.Infrastructure.BusinessObjects.Post;
 
 namespace StackOverflow.Infrastructure.Services
 {
@@ -17,7 +18,7 @@ namespace StackOverflow.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public void CreatePost(Post post)
+        public void CreatePost(PostBO post)
         {
             var postCount = _stackOverflowUnitOfWork.PostRepository
                 .GetCount(x => x.Title == post.Title);
@@ -33,7 +34,7 @@ namespace StackOverflow.Infrastructure.Services
                 throw new Exception("Same post already exist!");
         }
 
-        public void UpdatePost(Post post)
+        public void UpdatePost(PostBO post)
         {
             var count = _stackOverflowUnitOfWork.PostRepository
                 .GetCount(x => x.Title == post.Title && x.Id != post.Id);
@@ -56,7 +57,7 @@ namespace StackOverflow.Infrastructure.Services
             _stackOverflowUnitOfWork.Save();
         }
 
-        public Post GetPostById(int id)
+        public PostBO GetPostById(int id)
         {
             var postEntity = _stackOverflowUnitOfWork.PostRepository.GetById(id);
 
@@ -67,21 +68,21 @@ namespace StackOverflow.Infrastructure.Services
             return post;
         }
 
-        public IList<Post> GetAllPosts()
+        public IList<PostBO> GetAllPosts()
         {
-            var postEntities = _stackOverflowUnitOfWork.PostRepository.GetAll();
-
-            var products = new List<Post>();
+            var products = new List<PostBO>();
+            
+            var postEntities = _stackOverflowUnitOfWork.PostRepository.GetAll();            
 
             foreach (PostEntity entity in postEntities)
             {
-                products.Add(_mapper.Map<Post>(entity));
+                products.Add(_mapper.Map<PostBO>(entity));
             }
 
             return products;
         }
 
-        public IList<Post> GetAllPostsByUserId()
+        public IList<PostBO> GetAllPostsByUserId()
         {
             throw new NotImplementedException();
         }
