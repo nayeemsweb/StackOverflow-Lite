@@ -4,15 +4,6 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Styles
-{
-	<style>
-		.banner-area {
-			display: none;
-		}
-	</style>
-}
-
 <form class="user-form needs-validation" novalidate asp-area="" asp-controller="Account" asp-action="Register"
 	  asp-antiforgery="true" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 	<div class="row">
