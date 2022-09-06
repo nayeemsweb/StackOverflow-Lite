@@ -24,7 +24,7 @@
 
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="recent-questions" role="tabpanel" aria-labelledby="recent-questions-tab">
-				@foreach(var item in Model.)
+				@foreach(var post in Model.Posts)
 				{
 					<div class="single-qa-box like-dislike">
 						<div class="d-flex">
@@ -51,10 +51,10 @@
 							<div class="flex-grow-1 ms-3">
 								<ul class="graphic-design">
 									<li>
-										<a href="user.html">Teresa Klein</a>
+										<a href="user.html">@post.ApplicationUser.DisplayName</a>
 									</li>
 									<li>
-										<span>Latest Answer: 14 hours ago</span>
+										<span>Asked on: @post.CreatedAt</span>
 									</li>
 									<li>
 										<span>In:</span>
@@ -66,11 +66,10 @@
 
 								<h3>
 									<a href="queations-details.html">
-										If you open Illustrator by dragging the Photoshop file, why it becomes a JPG file
+										@post.Title
 									</a>
 								</h3>
-
-								<p>Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt. Donec rutrum congue leo eget malesuada. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus rutrum congue leo eget malesuada tincidunt.</p>
+								@Html.Raw(post.Description)								
 
 								<ul class="tag-list">
 									<li>
@@ -88,7 +87,14 @@
 									<ul class="anser-list">
 										<li>
 											<a href="polls.html">
-												50 Vote
+												@if (@post.Votes != null) 
+												{
+													<p>@post.Votes.Count Vote</p>
+												}
+												else
+												{
+													<p>0 Vote</p>
+												}
 											</a>
 										</li>
 										<li>
@@ -100,38 +106,6 @@
 											<a href="most-visited.html">
 												658 Views
 											</a>
-										</li>
-										<li>
-											<ul class="qa-share">
-												<li class="share-option">
-													<span>
-														<i class="ri-share-fill"></i>
-													</span>
-
-													<ul class="social-icon">
-														<li>
-															<a href="https://www.facebook.com/" target="_blank">
-																<i class="ri-facebook-fill"></i>
-															</a>
-														</li>
-														<li>
-															<a href="https://www.twitter.com/" target="_blank">
-																<i class="ri-twitter-line"></i>
-															</a>
-														</li>
-														<li>
-															<a href="https://www.linkedin.com/" target="_blank">
-																<i class="ri-linkedin-fill"></i>
-															</a>
-														</li>
-														<li>
-															<a href="https://www.instagram.com/" target="_blank">
-																<i class="ri-instagram-line"></i>
-															</a>
-														</li>
-													</ul>
-												</li>
-											</ul>
 										</li>
 									</ul>
 

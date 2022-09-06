@@ -17,11 +17,11 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
             _logger = logger;
         }
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var model = _scope.Resolve<ListPostModel>();
             model.ResolveDependency(_scope);
-            model.GetPosts();
+            await model.GetPosts();
 
             return View(model);
         }
