@@ -16,9 +16,14 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
             _scope = scope;
             _logger = logger;
         }
+        
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<ListPostModel>();
+            model.ResolveDependency(_scope);
+            model.GetPosts();
+
+            return View(model);
         }
         
         public IActionResult Create()

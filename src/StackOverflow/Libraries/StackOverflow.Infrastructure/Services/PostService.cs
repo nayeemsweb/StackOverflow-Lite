@@ -82,25 +82,41 @@ namespace StackOverflow.Infrastructure.Services
             return products;
         }
 
-        public IList<PostBO> GetAllPostsByUserId()
+        public (int total, int displayTotal, IList<PostBO> records) 
+            GetAllPostsByUserId(int pageIndex, int pageSize, string searchText, string orderBy, Guid userId)
         {
-            throw new NotImplementedException();
+            var questions = new List<PostBO>();
+            
+            var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.UserId == userId,
+                    orderBy, "ApplicationUser, Tags, Votes", pageIndex, pageSize, true);
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.UserId == userId && x.Title.Contains(searchText),
+                    orderBy, "ApplicationUser, Tags, Votes", pageIndex, pageSize, true);
+            }
+
+            foreach (PostEntity entitiy in result.data)
+            {
+                questions.Add(_mapper.Map<PostBO>(entitiy));
+            }
+            return (result.total, result.totalDisplay, questions);
         }
 
-        //public Task<(int total, int displayTotal, IList<Post> records)>
-        //    GetPosts(int pageIndex, int pageSize, string searchText, string orderBy)
-        //{
-        //    var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.Title.Contains(searchText),
-        //        orderBy, string.Empty, pageIndex, pageSize, true);
+        public (int total, int displayTotal, IList<PostBO> records)
+            GetPosts(int pageIndex, int pageSize, string searchText, string orderBy)
+        {
+            var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.Title.Contains(searchText),
+                orderBy, string.Empty, pageIndex, pageSize, true);
 
-        //    var posts = new List<Post>();
+            var posts = new List<PostBO>();
 
-        //    foreach (PostEntity entity in result.data)
-        //    {
-        //        posts.Add(_mapper.Map<Post>(entity));
-        //    }
+            foreach (PostEntity entity in result.data)
+            {
+                posts.Add(_mapper.Map<PostBO>(entity));
+            }
 
-        //    return (result.total, result.totalDisplay, posts);
-        //}
+            return (result.total, result.totalDisplay, posts);
+        }
     }
 }
