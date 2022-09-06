@@ -40,6 +40,13 @@ namespace StackOverflow.Infrastructure
             builder.RegisterType<PostService>().As<IPostService>()
                 .InstancePerLifetimeScope();
 
+            //Comment
+            builder.RegisterType<CommentRepository>().As<ICommentRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<CommentService>().As<ICommentService>()
+                .InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

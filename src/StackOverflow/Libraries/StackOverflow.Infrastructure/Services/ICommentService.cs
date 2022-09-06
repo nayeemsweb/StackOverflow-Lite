@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StackOverflow.Infrastructure.BusinessObjects;
 
 namespace StackOverflow.Infrastructure.Services
 {
-	internal interface ICommentService
+	public interface ICommentService
 	{
-	}
+        void CreateComment(Comment post);
+        void UpdateComment(Comment post);
+        void DeletePost(int id);
+    }
 }
