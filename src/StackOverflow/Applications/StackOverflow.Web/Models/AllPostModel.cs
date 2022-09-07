@@ -34,8 +34,7 @@ namespace StackOverflow.Web.Models
         public IList<Post> Posts { get; set; }
         public async Task GetPosts()
         {
-            await GetUserInfoAsync();
-            Posts = (_postService.GetAllPosts(1, 100, null, "CreatedAt DESC", UserInfo!.Id)).records;
+            Posts = (_postService.GetPosts(1, 100, null, "CreatedAt DESC")).records;
         }
     }
 }

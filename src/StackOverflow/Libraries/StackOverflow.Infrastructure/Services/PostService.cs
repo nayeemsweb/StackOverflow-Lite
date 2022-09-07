@@ -108,8 +108,14 @@ namespace StackOverflow.Infrastructure.Services
         public (int total, int displayTotal, IList<PostBO> records)
             GetPosts(int pageIndex, int pageSize, string searchText, string orderBy)
         {
-            var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.Title.Contains(searchText),
-                orderBy, string.Empty, pageIndex, pageSize, true);
+            var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(null,
+                orderBy, "ApplicationUser", pageIndex, pageSize, true);
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.Title.Contains(searchText),
+                    orderBy, "ApplicationUser, Comments, Tags", pageIndex, pageSize, true);
+            }
 
             var posts = new List<PostBO>();
 

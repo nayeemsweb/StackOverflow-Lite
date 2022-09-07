@@ -26,6 +26,11 @@ namespace StackOverflow.Web.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> PostDetails()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
