@@ -70,22 +70,22 @@ namespace StackOverflow.Infrastructure.Services
 
         public IList<PostBO> GetAllPosts()
         {
-            var products = new List<PostBO>();
+            var posts = new List<PostBO>();
             
             var postEntities = _stackOverflowUnitOfWork.PostRepository.GetAll();            
 
             foreach (PostEntity entity in postEntities)
             {
-                products.Add(_mapper.Map<PostBO>(entity));
+                posts.Add(_mapper.Map<PostBO>(entity));
             }
 
-            return products;
+            return posts;
         }
 
         public (int total, int displayTotal, IList<PostBO> records) 
-            GetAllPostsByUserId(int pageIndex, int pageSize, string searchText, string orderBy, Guid userId)
+            GetAllPosts(int pageIndex, int pageSize, string searchText, string orderBy, Guid userId)
         {
-            var questions = new List<PostBO>();
+            var posts = new List<PostBO>();
             
             var result = _stackOverflowUnitOfWork.PostRepository
                 .GetDynamic(x => x.UserId == userId,
@@ -100,9 +100,9 @@ namespace StackOverflow.Infrastructure.Services
 
             foreach (PostEntity entitiy in result.data)
             {
-                questions.Add(_mapper.Map<PostBO>(entitiy));
+                posts.Add(_mapper.Map<PostBO>(entitiy));
             }
-            return (result.total, result.totalDisplay, questions);
+            return (result.total, result.totalDisplay, posts);
         }
 
         public (int total, int displayTotal, IList<PostBO> records)

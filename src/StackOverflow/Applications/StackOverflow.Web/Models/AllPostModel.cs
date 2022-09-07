@@ -3,14 +3,13 @@ using AutoMapper;
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
-using StackOverflow.Web.Models;
 
-namespace StackOverflow.Web.Areas.MyProfile.Models
+namespace StackOverflow.Web.Models
 {
-	public class ListPostModel : BaseModel
+	public class AllPostModel : BaseModel
 	{
         private IPostService _postService;
-        public ListPostModel(IPostService postService,
+        public AllPostModel(IPostService postService,
             UserManager userManager,
             HttpContextAccessor httpContextAccessor,
             IMapper mapper)
@@ -19,7 +18,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             _postService = postService;
         }
 
-        public ListPostModel()
+        public AllPostModel()
         {
 
         }
@@ -34,14 +33,9 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
 
         public IList<Post> Posts { get; set; }
         public async Task GetPosts()
-		{
+        {
             await GetUserInfoAsync();
             Posts = (_postService.GetAllPosts(1, 100, null, "CreatedAt DESC", UserInfo!.Id)).records;
-		}
-
-        public void DeletePost(int id)
-        {
-            _postService.DeletePost(id);
         }
     }
 }

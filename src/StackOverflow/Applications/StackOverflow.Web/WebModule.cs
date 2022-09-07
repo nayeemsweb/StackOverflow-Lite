@@ -1,11 +1,15 @@
 ﻿using Autofac;
 using StackOverflow.Web.Areas.MyProfile.Models;
+using StackOverflow.Web.Models;
 using StackOverflow.Web.Models.Account;
 
 public class WebModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
+        //Home Models 
+        builder.RegisterType<AllPostModel>().AsSelf();
+
         //Account Models
         builder.RegisterType<RegisterModel>().AsSelf();
         builder.RegisterType<LoginModel>().AsSelf();

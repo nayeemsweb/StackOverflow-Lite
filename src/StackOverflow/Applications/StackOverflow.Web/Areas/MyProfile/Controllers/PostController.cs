@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Asn1.Ocsp;
 using StackOverflow.Web.Areas.MyProfile.Models;
 
 namespace StackOverflow.Web.Areas.MyProfile.Controllers
