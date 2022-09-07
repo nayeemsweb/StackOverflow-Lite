@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Web.Areas.MyProfile.Models;
 
@@ -29,6 +30,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateComment(CreateCommentModel model)
         {
@@ -38,7 +40,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
                 try
                 {
                     await model.CreateComment();
-                    return RedirectToAction(nameof(CreateComment));
+                    return RedirectToAction("PostDetails", "Home", new { area = "", id = model.PostId });
                 }
                 catch (Exception ex)
                 {

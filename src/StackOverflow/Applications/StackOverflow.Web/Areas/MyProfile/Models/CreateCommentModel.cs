@@ -40,7 +40,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             {
                 Description = Description,
                 UserId = UserInfo!.Id,
-                PostId = 1
+                PostId = PostId
             };
             _commentService.CreateComment(comment);
         }
@@ -53,5 +53,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
 
         [DataType(DataType.DateTime)]
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
+
+        public int PostId { get; set; }
     }
 }

@@ -26,9 +26,12 @@ namespace StackOverflow.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> PostDetails()
+        public async Task<IActionResult> PostDetails(int id)
         {
-            return View();
+            var model = _scope.Resolve<PostDetailsModel>();
+            model.ResolveDependency(_scope);
+            await model.GetPostDetails(id);
+            return View(model);
         }
 
         public IActionResult Privacy()

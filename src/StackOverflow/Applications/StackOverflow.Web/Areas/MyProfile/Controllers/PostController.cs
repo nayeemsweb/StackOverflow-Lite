@@ -1,9 +1,11 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Web.Areas.MyProfile.Models;
 
 namespace StackOverflow.Web.Areas.MyProfile.Controllers
 {
+    [Authorize]
     [Area("MyProfile")]
     public class PostController : Controller
     {

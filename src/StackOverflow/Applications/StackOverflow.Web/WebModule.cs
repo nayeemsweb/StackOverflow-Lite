@@ -9,6 +9,7 @@ public class WebModule : Module
     {
         //Home Models 
         builder.RegisterType<AllPostModel>().AsSelf();
+        builder.RegisterType<PostDetailsModel>().AsSelf();
 
         //Account Models
         builder.RegisterType<RegisterModel>().AsSelf();
