@@ -4,13 +4,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Styles
+@*@section Styles
 {
 	<partial name="_BannerHidePartial" />
-}
+}*@
 
 @*<h1 class="text-center">Welcome 👋 @Model.UserInfo.DisplayName</h1>*@
 
+<div class="offset-lg-1 col-lg-10 mt-5">
+	<div class="d-block justify-content-end">
+		<a class="default-btn float-end" asp-area="MyProfile" asp-controller="Post" asp-action="Create">Ask Question</a>
+	</div>
+</div>
 <div class="offset-lg-1 col-lg-10 mt-5">
 	<div class="middull-content">
 
@@ -56,16 +61,10 @@
 									<li>
 										<span>Asked on: @post.CreatedAt</span>
 									</li>
-									<li>
-										<span>In:</span>
-										<a href="tags.html" class="graphic">
-											Graphic design
-										</a>
-									</li>
 								</ul>
 
 								<h3>
-									<a href="queations-details.html">
+									<a href="">
 										@post.Title
 									</a>
 								</h3>
@@ -73,13 +72,13 @@
 
 								<ul class="tag-list">
 									<li>
-										<a href="tags.html">Discussion</a>
+										<a>Discussion</a>
 									</li>
 									<li>
-										<a href="tags.html">Photoshop</a>
+										<a>Photoshop</a>
 									</li>
 									<li>
-										<a href="tags.html">Analytics</a>
+										<a>Analytics</a>
 									</li>
 								</ul>
 
@@ -102,16 +101,17 @@
 												2 Answer
 											</a>
 										</li>
-										<li>
-											<a href="most-visited.html">
-												658 Views
-											</a>
-										</li>
 									</ul>
 
-									<a href="most-answered.html" class="default-btn">
-										Answer
-									</a>
+									<div class="d-block float-end">
+										<button class="default-btn" asp-area="MyProfile" asp-controller="Post" asp-action="Update"
+											onclick="window.location.href='/MyProfile/Post/Update/id'">
+											Edit
+										</button>
+										<button class="default-btn">
+											Delete
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -119,14 +119,14 @@
 				}
 				
 				<div class="pagination-area text-center">
-					<a href="all-queations.html" class="next page-numbers">
+					<a href="" class="next page-numbers">
 						<i class="ri-arrow-left-line"></i>
 					</a>
 					<span class="page-numbers current" aria-current="page">1</span>
-					<a href="all-queations.html" class="page-numbers">2</a>
-					<a href="all-queations.html" class="page-numbers">3</a>
+					<a href="" class="page-numbers">2</a>
+					<a href="" class="page-numbers">3</a>
 										
-					<a href="all-queations.html" class="next page-numbers">
+					<a href="" class="next page-numbers">
 						<i class="ri-arrow-right-line"></i>
 					</a>
 				</div>
@@ -135,3 +135,8 @@
 	</div>
 </div>
 
+@section Scripts
+{
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

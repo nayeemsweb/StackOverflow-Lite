@@ -18,7 +18,7 @@
 			<div asp-validation-summary="All" class="text-danger"></div>
 			<div class="form-group">
 				<label asp-for="Title">Title</label>
-				<input asp-for="Title" type="text" class="form-control">
+				<input asp-for="Title" type="text" class="form-control" maxlength="150">
 			</div>
 			@*<div class="form-group">
 				<label asp-for="Tag">Tags (Add up to 5 tags to describe what your question is about)</label>
@@ -26,7 +26,7 @@
 			</div>*@
 			<div class="form-group">
 				<label asp-for="Description">Description</label>
-				<textarea asp-for="Description" id="summernote"></textarea>
+				<textarea asp-for="Description" id="summernote" maxlength="2000"></textarea>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="default-btn">Create Post</button>

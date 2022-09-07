@@ -53,9 +53,31 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
             return View(model);
         }
         
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
-            return View();
+            var model = _scope.Resolve<UpdatePostModel>();            
+            model.LoadData(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(UpdatePostModel model)
+        {
+            model.ResolveDependency(_scope);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await model.UpdatePost();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, ex.Message);
+                }
+            }
+            return View(model);
         }
     }
 }
