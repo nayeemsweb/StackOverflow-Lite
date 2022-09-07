@@ -25,6 +25,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
         public async Task<IActionResult> CreateComment()
         {
             var model = _scope.Resolve<CreateCommentModel>();
+            model.ResolveDependency(_scope);
             return View(model);
         }
 
@@ -37,7 +38,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
                 try
                 {
                     await model.CreateComment();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(CreateComment));
                 }
                 catch (Exception ex)
                 {

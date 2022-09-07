@@ -39,7 +39,8 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             var comment = new Comment
             {
                 Description = Description,
-                UserId = UserInfo!.Id
+                UserId = UserInfo!.Id,
+                PostId = 1
             };
             _commentService.CreateComment(comment);
         }

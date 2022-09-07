@@ -11,7 +11,7 @@
             <form id="deleteForm" asp-controller="Post" asp-action="Delete" method="post" asp-antiforgery="true">
                 <div class="modal-body">
                     <p>Are you sure, you want to delete?</p>
-                    <input type="hidden" id="id" value="id" />
+                    <input id="deleteId" />
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

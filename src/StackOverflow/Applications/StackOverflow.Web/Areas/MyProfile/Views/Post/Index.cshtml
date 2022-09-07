@@ -10,6 +10,9 @@
 }*@
 
 @*<h1 class="text-center">Welcome 👋 @Model.UserInfo.DisplayName</h1>*@
+<div>
+	<h1 class="offset-lg-1 col-lg-10 text-center">Asked Questions</h1>
+</div>
 
 <div class="offset-lg-1 col-lg-10 mt-5">
 	<div class="d-block justify-content-end">
@@ -109,9 +112,10 @@
 											asp-route-id="@post.Id">
 											Edit
 										</a>
-										<button class="default-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id='@post.Id'>
+										<a class="default-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+										data-id='@post.Id' value='@post.Id'>
 											Delete
-										</button>
+										</a>
 										<partial name="_DeleteModalPartial" />
 									</div>
 								</div>
@@ -141,4 +145,27 @@
 {
 	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+	<script>
+		//$('#exampleModal').on('click', '.show-bs-modal', function (event) {
+		//	var postId = $(this).data("id");
+		//	var modal = $("#modal-default");
+		//	modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+		//	$("#deleteId").val(postId);
+		//	$("#deleteForm").attr("action", "/MyProfile/Post/Delete");
+		//	modal.modal('show');
+		//});
+		//$("#deleteButton").click(function () {
+		//	$("#deleteForm").submit();
+		//});
+
+		$(document).on("click", ".show-bs-modal'", function () {
+			var myBookId = $(this).data('id');
+			$(".modal-body #deleteId").val(myBookId);
+			// As pointed out in comments,
+			// it is unnecessary to have to manually call the modal.
+			// $('#addBookDialog').modal('show');
+		});
+
+	</script>
 }

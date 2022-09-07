@@ -28,7 +28,7 @@
 			</li>
 		</ul>
 
-		<form class="aq-form">
+		<form class="aq-form" >
 			<i class="ri-search-line"></i>
 			<input type="text" class="form-control" placeholder="Have a question? Ask or enter a search">
 			<button class="aq-btn">
@@ -213,13 +213,15 @@
 				</div>
 			</div>
 
-			<form class="your-answer-form">
+			<form class="your-answer-form" method="post" asp-antiforgery="true"
+				  asp-area="MyProfile" asp-controller="Comment" asp-action="CreateComment">
+					<div asp-validation-summary="All" class="text-danger"></div>
 				<div class="form-group">
 					<h3>Your Answer</h3>
 				</div>
 				<div class="form-group">
 					<label asp-for="Description">Write your answer here.</label>
-					<div asp-for="Description" id="summernote"></div>
+						<textarea asp-for="Description" id="summernote" maxlength="1500"></textarea>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="default-btn">Post Your Answer</button>
