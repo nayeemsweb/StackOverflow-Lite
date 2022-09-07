@@ -39,5 +39,10 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             Posts = (_postService.GetAllPostsByUserId(1, 100, null, "CreatedAt DESC", UserInfo!.Id)).records;
 
 		}
-	}
+
+        internal void DeletePost(int id)
+        {
+            _postService.DeletePost(id);
+        }
+    }
 }

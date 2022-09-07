@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Ocsp;
 using StackOverflow.Web.Areas.MyProfile.Models;
 
 namespace StackOverflow.Web.Areas.MyProfile.Controllers
@@ -26,14 +27,13 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
             return View(model);
         }
         
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var model = _scope.Resolve<CreatePostModel>();
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreatePostModel model)
         {
             model.ResolveDependency(_scope);
@@ -53,15 +53,14 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
             return View(model);
         }
         
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
             var model = _scope.Resolve<UpdatePostModel>();            
             model.LoadData(id);
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(UpdatePostModel model)
         {
             model.ResolveDependency(_scope);
@@ -78,6 +77,22 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
                 }
             }
             return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var model = _scope.Resolve<ListPostModel>();
+                model.DeletePost(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
