@@ -5,6 +5,7 @@ using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
 using StackOverflow.Web.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 
 namespace StackOverflow.Web.Areas.MyProfile.Models
 {
@@ -34,6 +35,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
 
         public async Task CreatePost()
         {
+            var data = JsonSerializer.Deserialize<List<Value>>(Tag);
             await GetUserInfoAsync();
             var post = new Post
             {
@@ -41,6 +43,13 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
                 Description = Description,
                 UserId = UserInfo!.Id
             };
+
+            var tags = new List<Tag>();
+            foreach (var tag in data)
+            {
+                tags.Add(new Tag { Name = tag.value });
+            }
+            post.Tags = tags;
             _postService.CreatePost(post);
         }
 
@@ -53,10 +62,15 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
         [StringLength(2000, ErrorMessage = "Description can't be more than 2000 characters.")]
         [DataType(DataType.MultilineText)]
         public string? Description { get; set; }
-        //public string? Tag { get; set; }
+        public string Tag { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
         public Guid? UserId { get; set; }
     }
+}
+
+public class Value
+{
+    public string value { get; set; }
 }

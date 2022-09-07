@@ -77,15 +77,15 @@
 								@Html.Raw(post.Description)
 
 								<ul class="tag-list">
-									<li>
-										<a>Discussion</a>
-									</li>
-									<li>
-										<a>Photoshop</a>
-									</li>
-									<li>
-										<a>Analytics</a>
-									</li>
+									@if(post.Tags is not null)
+									{
+										@foreach (var tag in post.Tags)
+										{
+											<li>
+												<a>@tag.Name</a>
+											</li>
+										}
+									}
 								</ul>
 
 								<div class="d-flex justify-content-between align-items-center">

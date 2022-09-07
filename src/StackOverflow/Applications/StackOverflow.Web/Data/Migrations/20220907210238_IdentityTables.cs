@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StackOverflow.Web.Data.Migrations
 {
-    public partial class OtherEntities : Migration
+    public partial class IdentityTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -211,7 +211,7 @@ namespace StackOverflow.Web.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostId = table.Column<int>(type: "int", nullable: false)
+                    PostId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -220,8 +220,7 @@ namespace StackOverflow.Web.Data.Migrations
                         name: "FK_Tag_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -252,12 +251,12 @@ namespace StackOverflow.Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "637981056532536444", "User", "USER" });
+                values: new object[] { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "637982029583843955", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DisplayName", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "e99a3b69-9007-4d1d-ad98-5b6b64a29c97", "Nayeem Rahman", "nayeemrahman@gmail.com", true, false, null, "NAYEEMRAHMAN@GMAIL.COM", null, "123456", null, false, "98483057-8564-41ad-96a7-1d913758b906", false, null });
+                values: new object[] { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "e1e06482-d204-4efa-8591-1d727a338214", "Nayeem Rahman", "nayeemrahman@gmail.com", true, false, null, "NAYEEMRAHMAN@GMAIL.COM", null, "123456", null, false, "b32a55b5-896b-4d9e-9d44-1e801e9451ef", false, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

@@ -60,7 +60,7 @@ namespace StackOverflow.Infrastructure.Services
         public PostBO GetPostById(int id)
         {
             var postEntity = _stackOverflowUnitOfWork.PostRepository.
-                Get(x => x.Id == id, "ApplicationUser,Comments,Comments.ApplicationUser").FirstOrDefault();
+                Get(x => x.Id == id, "ApplicationUser,Comments,Comments.ApplicationUser,Tags").FirstOrDefault();
 
             if (postEntity is null)
                 throw new InvalidOperationException("Post with this id not found.");
@@ -90,13 +90,13 @@ namespace StackOverflow.Infrastructure.Services
             
             var result = _stackOverflowUnitOfWork.PostRepository
                 .GetDynamic(x => x.UserId == userId,
-                    orderBy, "ApplicationUser", pageIndex, pageSize, true);
+                    orderBy, "ApplicationUser,Tags", pageIndex, pageSize, true);
 
             if (!string.IsNullOrEmpty(searchText))
             {
                 result = _stackOverflowUnitOfWork.PostRepository
                     .GetDynamic(x => x.UserId == userId && x.Title.Contains(searchText),
-                    orderBy, "ApplicationUser", pageIndex, pageSize, true);
+                    orderBy, "ApplicationUser,Tags", pageIndex, pageSize, true);
             }
 
             foreach (PostEntity entitiy in result.data)
@@ -110,7 +110,7 @@ namespace StackOverflow.Infrastructure.Services
             GetPosts(int pageIndex, int pageSize, string searchText, string orderBy)
         {
             var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(null,
-                orderBy, "ApplicationUser", pageIndex, pageSize, true);
+                orderBy, "ApplicationUser,Tags", pageIndex, pageSize, true);
 
             if (!string.IsNullOrEmpty(searchText))
             {

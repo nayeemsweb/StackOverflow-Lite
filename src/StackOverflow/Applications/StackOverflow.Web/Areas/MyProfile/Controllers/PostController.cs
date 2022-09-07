@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Web.Areas.MyProfile.Models;
+using System.Text.Json;
 
 namespace StackOverflow.Web.Areas.MyProfile.Controllers
 {
@@ -38,6 +39,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
         public async Task<IActionResult> Create(CreatePostModel model)
         {
             model.ResolveDependency(_scope);
+
             if (ModelState.IsValid)
             {
                 try
