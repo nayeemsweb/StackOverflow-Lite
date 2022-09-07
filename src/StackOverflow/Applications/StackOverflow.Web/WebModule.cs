@@ -15,6 +15,11 @@ public class WebModule : Module
         builder.RegisterType<UpdatePostModel>().AsSelf();
         builder.RegisterType<ListPostModel>().AsSelf();
 
+        //Comment Models
+        builder.RegisterType<CreateCommentModel>().AsSelf();
+        builder.RegisterType<UpdateCommentModel>().AsSelf();
+        builder.RegisterType<ListCommentModel>().AsSelf();
+
         base.Load(builder);
     }
 }

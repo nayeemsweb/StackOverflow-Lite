@@ -87,12 +87,14 @@ namespace StackOverflow.Infrastructure.Services
         {
             var questions = new List<PostBO>();
             
-            var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.UserId == userId,
+            var result = _stackOverflowUnitOfWork.PostRepository
+                .GetDynamic(x => x.UserId == userId,
                     orderBy, "ApplicationUser", pageIndex, pageSize, true);
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.UserId == userId && x.Title.Contains(searchText),
+                result = _stackOverflowUnitOfWork.PostRepository
+                    .GetDynamic(x => x.UserId == userId && x.Title.Contains(searchText),
                     orderBy, "ApplicationUser", pageIndex, pageSize, true);
             }
 
