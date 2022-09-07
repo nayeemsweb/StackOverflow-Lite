@@ -40,7 +40,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
 
 		}
 
-        internal void DeletePost(int id)
+        public void DeletePost(int id)
         {
             _postService.DeletePost(id);
         }

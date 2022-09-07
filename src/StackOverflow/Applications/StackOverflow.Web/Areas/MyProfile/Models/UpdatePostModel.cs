@@ -38,6 +38,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             await GetUserInfoAsync();
             var post = new Post
             {
+                Id=Id,
                 Title = Title,
                 Description = Description,
                 UserId = UserInfo!.Id
@@ -48,11 +49,10 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
         public void LoadData(int id)
         {
             var data = _postService.GetPostById(id);
-            {
+            
                 Title = data.Title;
                 Description = data.Description;
-                UserId = data.UserId;
-            }
+                UserId = data.UserId;            
         }
 
         public int Id { get; set; }

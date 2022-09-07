@@ -55,7 +55,8 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
         
         public async Task<IActionResult> Update(int id)
         {
-            var model = _scope.Resolve<UpdatePostModel>();            
+            var model = _scope.Resolve<UpdatePostModel>();
+            model.ResolveDependency(_scope);
             model.LoadData(id);
             return View(model);
         }
@@ -85,6 +86,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
             try
             {
                 var model = _scope.Resolve<ListPostModel>();
+                model.ResolveDependency(_scope);
                 model.DeletePost(id);
             }
             catch (Exception ex)
