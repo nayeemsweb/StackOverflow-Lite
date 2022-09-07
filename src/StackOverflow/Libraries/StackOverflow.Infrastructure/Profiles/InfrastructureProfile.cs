@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.Entities.Membership;
+using PostEntity = StackOverflow.Infrastructure.Entities.Post;
+using CommentEntity = StackOverflow.Infrastructure.Entities.Comment;
+using VoteEntity = StackOverflow.Infrastructure.Entities.Vote;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +17,9 @@ namespace StackOverflow.Infrastructure.Profiles
         public InfrastructureProfile()
         {
             CreateMap<ApplicationMember, ApplicationUser>().ReverseMap();
+            CreateMap<Post, PostEntity>().ReverseMap();
+            CreateMap<Comment, CommentEntity>().ReverseMap();
+            CreateMap<Vote, VoteEntity>().ReverseMap();
         }
     }
 }

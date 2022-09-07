@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Autofac;
+using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Web.Models;
 using System.Diagnostics;
 
@@ -7,15 +8,22 @@ namespace StackOverflow.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ILifetimeScope _scope;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            ILifetimeScope scope)
         {
             _logger = logger;
+            _scope = scope;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = _scope.Resolve<AllPostModel>();
+            model.ResolveDependency(_scope);
+            await model.GetPosts();
+            
+            return View(model);
         }
 
         public IActionResult Privacy()

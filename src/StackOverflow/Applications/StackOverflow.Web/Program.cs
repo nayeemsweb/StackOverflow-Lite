@@ -32,12 +32,14 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllersWithViews();
 builder.Services.
     AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(connectionString,
     b => b.MigrationsAssembly(assemblyName)));
+
 
 builder.Services
     .AddIdentity<ApplicationUser, Role>()
@@ -75,6 +77,23 @@ builder.Host.UseSerilog((ctx, lc) => lc
     .Enrich.FromLogContext()
     .ReadFrom.Configuration(builder.Configuration));
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(7);
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});
+
 try
 {
     var app = builder.Build();
@@ -99,6 +118,7 @@ try
 
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UseSession();
 
     app.MapControllerRoute(
     name: "areas",

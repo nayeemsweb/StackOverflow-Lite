@@ -192,7 +192,8 @@
 	<!-- End Navbar Area -->
 
 	<!-- Start Banner Area -->
-	<partial name="_BannerPartial" />
+	@await RenderSectionAsync("BannerArea", required: false)
+	
 	<!-- End Banner Area -->
 
 	<!-- Start Mail Content Area -->
@@ -229,6 +230,25 @@
 	<script src="~/pify/assets/js/editor.js"></script>
 	<script src="~/pify/assets/js/like-dislike.min.js"></script>
 	<script src="~/pify/assets/js/custom.js"></script>
+	@*<script>
+		document.addEventListener('contextmenu', function (e) {
+			e.preventDefault();
+		});
+		document.onkeydown = function (e) {
+			if (event.keyCode == 123) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+				return false;
+			}
+			if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+				return false;
+			}
+		}
+	</script>*@
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 

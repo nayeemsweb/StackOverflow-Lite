@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using StackOverflow.Infrastructure.DbContexts;
+using StackOverflow.Infrastructure.Repositories;
+using StackOverflow.Infrastructure.Services;
 using StackOverflow.Infrastructure.UnitOfWorks;
 
 namespace StackOverflow.Infrastructure
@@ -29,6 +31,20 @@ namespace StackOverflow.Infrastructure
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<StackOverflowUnitOfWork>().As<IStackOverflowUnitOfWork>()
+                .InstancePerLifetimeScope();
+
+            //Post
+            builder.RegisterType<PostRepository>().As<IPostRepository>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<PostService>().As<IPostService>()
+                .InstancePerLifetimeScope();
+
+            //Comment
+            builder.RegisterType<CommentRepository>().As<ICommentRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<CommentService>().As<ICommentService>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);

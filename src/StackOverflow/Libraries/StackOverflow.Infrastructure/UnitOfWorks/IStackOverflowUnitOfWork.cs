@@ -1,13 +1,11 @@
 ﻿using StackOverflow.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StackOverflow.Infrastructure.Repositories;
 
 namespace StackOverflow.Infrastructure.UnitOfWorks
 {
     public interface IStackOverflowUnitOfWork : IUnitOfWork
     {
+        public IPostRepository PostRepository { get; set; }
+        public ICommentRepository CommentRepository { get; set; }
     }
 }

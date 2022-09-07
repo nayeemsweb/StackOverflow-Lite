@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StackOverflow.Infrastructure.Entities;
 using StackOverflow.Infrastructure.Entities.Membership;
 using StackOverflow.Infrastructure.Seeds;
 
@@ -36,6 +37,7 @@ namespace StackOverflow.Infrastructure.DbContexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //Seeds
             builder.Entity<ApplicationUser>()
                 .HasData(ApplicationUserSeed.Users);
 
@@ -45,9 +47,30 @@ namespace StackOverflow.Infrastructure.DbContexts
             builder.Entity<UserRole>()
                 .HasData(UserRoleSeed.UserRoles);
 
+            //Post
+            builder.Entity<Post>()
+               .HasMany(m => m.Comments)
+               .WithOne(c => c.Post)
+               .HasForeignKey(fk => fk.PostId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Post>()
+                .HasOne(a => a.ApplicationUser)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(fk => fk.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Comment>()
+                .HasOne(c => c.ApplicationUser)
+                .WithMany(d => d.Comments)
+                .HasForeignKey(fk => fk.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             base.OnModelCreating(builder);
         }
 
-        public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comment { get; set; }
     }
 }
