@@ -5,208 +5,211 @@
 }
 
 @section Styles
-	{
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    {
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 }
 
-<div class="offset-lg-1 col-lg-10">
-	<div class="middull-content">
-		<ul class="page-nish">
-			<li>
-				<a asp-area="" asp-controller="Home" asp-action="Index">
-					<i class="ri-home-8-line"></i>
-					Home
-				</a>
-			</li>
-			<li>
-				Question
-			</li>
-			<li class="active">
-				Question Details
-			</li>
-		</ul>
+    <div class="offset-lg-1 col-lg-10">
+        <div class="middull-content">
+            <ul class="page-nish">
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="ri-home-8-line"></i>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    Question
+                </li>
+                <li class="active">
+                    Question Details
+                </li>
+            </ul>
 
-		<form class="aq-form">
-			<i class="ri-search-line"></i>
-			<input type="text" class="form-control" placeholder="Have a question? Ask or enter a search">
-			<button class="aq-btn">
-				Ask Question
-			</button>
-		</form>
-		
-		<div class="question-details-area">
-				<div class="question-details-content like-dislike">
-					<div class="d-flex">
-						<div class="link-unlike flex-shrink-0">
-							<a>
-								<img src="~/pify/assets/images/user/user-1.jpg" alt="Image">
-							</a>
+            <form class="aq-form">
+                <i class="ri-search-line"></i>
+                <input type="text" class="form-control" placeholder="Have a question? Ask or enter a search">
+                <button class="aq-btn">
+                    Ask Question
+                </button>
+            </form>
 
-							<div class="donet-like-list">
-								<button class="like-unlink-count like">
-									<i class="ri-thumb-up-fill"></i>
-									<span>4974</span>
-								</button>
-							</div>
+            <div class="question-details-area">
+                <div class="question-details-content like-dislike">
+                    <div class="d-flex">
+                        <div class="link-unlike flex-shrink-0">
+                            <a>
+                                <img src="~/pify/assets/images/user/user-1.jpg" alt="Image">
+                            </a>
 
-							<div class="donet-like-list">
-								<button class="like-unlink-count dislike">
-									<i class="ri-thumb-down-fill"></i>
-									<span>25</span>
-								</button>
-							</div>
-						</div>
+                            <div class="donet-like-list">
+                                <button class="like-unlink-count like">
+                                    <i class="ri-thumb-up-fill"></i>
+                                    <span>4974</span>
+                                </button>
+                            </div>
 
-						<div class="flex-grow-1 ms-3">
-							<ul class="graphic-design">
-								<li>
-									<a>Teresa Klein</a>
-								</li>
-								<li>
-									<span>Created At: @Model.Post.CreatedAt</span>
-								</li>
-								<li>
-									<span>In:</span>
-									<a class="graphic">
-										Graphic design
-									</a>
-								</li>
-							</ul>
+                            <div class="donet-like-list">
+                                <button class="like-unlink-count dislike">
+                                    <i class="ri-thumb-down-fill"></i>
+                                    <span>25</span>
+                                </button>
+                            </div>
+                        </div>
 
-							<h3>
-								<a href="queations-details.html">
-									@Model.Post.Title
-								</a>
-							</h3>
+                        <div class="flex-grow-1 ms-3">
+                            <ul class="graphic-design">
+                                <li>
+                                    <a>@Model.Post.ApplicationUser.DisplayName</a>
+                                </li>
+                                <li>
+                                    <span>Created At: @Model.Post.CreatedAt</span>
+                                </li>
+                                <li>
+                                    <span>In:</span>
+                                    <a class="graphic">
+                                        Software Development
+                                    </a>
+                                </li>
+                            </ul>
 
-							@Html.Raw(Model.Post.Description);
-							<ul class="tag-list">
-								<li>
-									<a>Discussion</a>
-								</li>
-								<li>
-									<a>Photoshop</a>
-								</li>
-								<li>
-									<a>Analytics</a>
-								</li>
-							</ul>
+                            <h3>
+                                <a href="queations-details.html">
+                                    @Model.Post.Title
+                                </a>
+                            </h3>
 
-							<div class="d-flex justify-content-between align-items-center">
-								<ul class="anser-list">
-									<li>
-										<a>
-											24 Vote
-										</a>
-									</li>
-									<li>
-										<a href="most-answered.html">
-											2 Answer
-										</a>
-									</li>
-								</ul>
+                            @Html.Raw(Model.Post.Description);
+                            <ul class="tag-list">
+                                <li>
+                                    <a>Discussion</a>
+                                </li>
+                                <li>
+                                    <a>Photoshop</a>
+                                </li>
+                                <li>
+                                    <a>Analytics</a>
+                                </li>
+                            </ul>
 
-								<a href="most-answered.html" class="default-btn">
-									Answer
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <ul class="anser-list">
+                                    <li>
+                                        <a>
+                                            24 Vote
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="most-answered.html">
+                                            2 Answer
+                                        </a>
+                                    </li>
+                                </ul>
 
-				<ul class="answerss d-flex justify-content-between align-items-center">
-					<li>
-						@if(@Model.Post.Comments is null)
-						{
-							<h3>0 Comment</h3>
-						}
-						else
-						{
-							<h3>@Model.Post.Comments.Count Comments</h3>
-						}
-					</li>
-					<li>
-						<select class="form-select" aria-label="Default select example">
-							<option selected>All answer</option>
-							<option value="1">One</option>
-							<option value="2">Two</option>
-							<option value="3">Three</option>
-						</select>
-					</li>
-				</ul>
+                                <a asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-id="@Model.Post.Id" class="default-btn">
+                                    Answer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-				@foreach (var comment in Model.Post.Comments)
-			{
-				<div class="answer-question-details like-dislike">
-					<div class="d-flex">
-						<div class="link-unlike flex-shrink-0">
-							<a>
-								<img src="~/pify/assets/images/user/user-13.jpg" alt="Image">
-							</a>
+                <ul class="answerss d-flex justify-content-between align-items-center">
+                    <li>
+                    @if (@Model.Post.Comments is null)
+                    {
+                        <h3>0 Answer</h3>
+                    }
+                    else
+                    {
+                        <h3>@Model.Post.Comments.Count Answers</h3>
+                    }
+                </li>
+                <li>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>All answer</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </li>
+            </ul>
 
-							<div class="donet-like-list">
-								<button class="like-unlink-count like">
-									<i class="ri-thumb-up-fill"></i>
-									<span>197</span>
-								</button>
-							</div>
+            @foreach (var comment in Model.Post.Comments)
+            {
+                <div class="answer-question-details like-dislike">
+                    <div class="d-flex">
+                        <div class="link-unlike flex-shrink-0">
+                            <a>
+                                <img src="~/pify/assets/images/user/user-13.jpg" alt="Image">
+                            </a>
 
-							<div class="donet-like-list">
-								<button class="like-unlink-count dislike">
-									<i class="ri-thumb-down-fill"></i>
-									<span>2</span>
-								</button>
-							</div>
-						</div>
+                            <div class="donet-like-list">
+                                <button class="like-unlink-count like">
+                                    <i class="ri-thumb-up-fill"></i>
+                                    <span>197</span>
+                                </button>
+                            </div>
 
-						<div class="flex-grow-1 ms-3">
-							<ul class="latest-answer-list">
-								<li>
-									<a>@comment.ApplicationUser.DisplayName</a>
-								</li>
-								<li>
-									<span>Commented At: @comment.CreatedAt</span>
-								</li>
-								<li class="reports">
-									<a class="report">
-										<i class="ri-error-warning-line"></i>
-										Report
-									</a>
-								</li>
-							</ul>
-							@Html.Raw(comment.Description)
-						</div>
-					</div>
-				</div>
-			}
+                            <div class="donet-like-list">
+                                <button class="like-unlink-count dislike">
+                                    <i class="ri-thumb-down-fill"></i>
+                                    <span>2</span>
+                                </button>
+                            </div>
+                        </div>
 
-			<form class="your-answer-form" method="post" asp-antiforgery="true"
-				  asp-area="MyProfile" asp-controller="Comment" asp-action="CreateComment">
-				<div asp-validation-summary="All" class="text-danger"></div>
-				
-				<div class="form-group">
-					<h3>Your Answer</h3>
-				</div>
-				<div class="form-group">
-					<label asp-for="Description">Write your answer here.</label>
-					<textarea asp-for="Description" id="summernote" maxlength="1500"></textarea>
-				</div>
-				<input type="hidden" name="PostId" value="@Model.Post.Id" />
-				<div class="form-group">
-					<button type="submit" class="default-btn">Post Your Answer</button>
-				</div>
-			</form>
-			</div>		
-	</div>
+                        <div class="flex-grow-1 ms-3">
+                            <ul class="latest-answer-list">
+                                <li>
+                                    <a>@comment.ApplicationUser.DisplayName</a>
+                                </li>
+                                <li>
+                                    <span>Commented At: @comment.CreatedAt</span>
+                                </li>
+                                <li class="reports">
+                                    <a class="report">
+                                        <i class="ri-error-warning-line"></i>
+                                        Report
+                                    </a>
+                                </li>
+                            </ul>
+                            @Html.Raw(comment.Description)
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <form class="your-answer-form needs-validation" novalidate method="post" asp-antiforgery="true"
+                  asp-area="MyProfile" asp-controller="Comment" asp-action="CreateComment">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <h3>Your Answer</h3>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" for="summernote">Write your answer here.</label>
+                    <textarea asp-for="Description" id="summernote" maxlength="1500" required></textarea>
+                    <div class="invalid-feedback">
+                        Answer cant't be greater than 1500 characters.
+                    </div>
+                </div>
+                <input type="hidden" name="PostId" value="@Model.Post.Id" />
+                <div class="form-group">
+                    <button type="submit" class="default-btn">Post Your Answer</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @section Scripts
 {
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-	<script>
-		$(document).ready(function () {
-			$('#summernote').summernote();
-		});
-	</script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+    </script>
 }

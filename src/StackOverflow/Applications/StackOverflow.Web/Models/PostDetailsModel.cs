@@ -3,6 +3,7 @@ using AutoMapper;
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace StackOverflow.Web.Models
 {
@@ -33,6 +34,8 @@ namespace StackOverflow.Web.Models
 
         public Post Post { get; set; }
 
+        [StringLength(2000, ErrorMessage = "Description can't be more than 2000 characters.")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public async Task GetPostDetails(int id)
         {

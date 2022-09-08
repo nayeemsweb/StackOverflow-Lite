@@ -3,27 +3,27 @@ using AutoMapper;
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
-using StackOverflow.Web.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace StackOverflow.Web.Areas.MyProfile.Models
+namespace StackOverflow.Web.Models
 {
-	public class CreateCommentModel : BaseModel
+	public class UpdateCommentModel : BaseModel
 	{
-        private ICommentService _commentService;
-        public CreateCommentModel(ICommentService commentService,
-            UserManager userManager,
+		private ICommentService _commentService;
+
+		public UpdateCommentModel(ICommentService commentService,
+			UserManager userManager,
             HttpContextAccessor httpContextAccessor,
             IMapper mapper)
-            : base(userManager, httpContextAccessor, mapper)
-        {
-            _commentService = commentService;
-        }
+			: base(userManager, httpContextAccessor, mapper)
+		{
+			_commentService = commentService;
+		}
 
-        public CreateCommentModel()
-        {
+		public UpdateCommentModel()
+		{
 
-        }
+		}
 
         public override void ResolveDependency(ILifetimeScope scope)
         {
@@ -33,16 +33,16 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             base.ResolveDependency(scope);
         }
 
-        public async Task CreateComment()
+        public async Task UpdatePost()
         {
+
             await GetUserInfoAsync();
             var comment = new Comment
             {
-                Description = Description,
-                UserId = UserInfo!.Id,
-                PostId = PostId
+                
+                UserId = UserInfo!.Id
             };
-            _commentService.CreateComment(comment);
+            _commentService.UpdateComment(comment);
         }
 
         public int Id { get; set; }

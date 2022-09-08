@@ -55,13 +55,18 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
 
         public int Id { get; set; }
 
+        [Required]
         [StringLength(150, ErrorMessage = "Title can't be more than 150 characters.")]
         [DataType(DataType.Text)]
         public string? Title { get; set; }
 
+        [Required]
         [StringLength(2000, ErrorMessage = "Description can't be more than 2000 characters.")]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Text)]
         public string? Description { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
         public string Tag { get; set; }
 
         [DataType(DataType.DateTime)]
