@@ -168,9 +168,10 @@
                                     <span>Commented At: @comment.CreatedAt</span>
                                 </li>
                                 <li class="reports">
-                                    <a class="report">
+                                    <a class="report" asp-area="" asp-controller="Home"
+									   asp-action="UpdateComment" asp-route-id="@comment.Id">
                                         <i class="ri-error-warning-line"></i>
-                                        Report
+                                        Edit
                                     </a>
                                 </li>
                             </ul>

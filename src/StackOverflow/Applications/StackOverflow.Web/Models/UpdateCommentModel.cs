@@ -33,16 +33,27 @@ namespace StackOverflow.Web.Models
             base.ResolveDependency(scope);
         }
 
-        public async Task UpdatePost()
+        public async Task UpdateComment()
         {
 
             await GetUserInfoAsync();
             var comment = new Comment
             {
-                
-                UserId = UserInfo!.Id
+                Id = Id,
+                Description = Description,
+                UserId = UserInfo!.Id,
+                PostId = PostId
             };
             _commentService.UpdateComment(comment);
+        }
+
+        public void LoadData(int id)
+        {
+            var data = _commentService.GetCommentById(id);
+            
+            Description = data.Description;
+            UserId = data.UserId;
+            PostId = data.PostId;
         }
 
         public int Id { get; set; }
@@ -56,5 +67,6 @@ namespace StackOverflow.Web.Models
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
 
         public int PostId { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

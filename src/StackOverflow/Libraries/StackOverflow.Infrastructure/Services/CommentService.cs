@@ -58,7 +58,14 @@ namespace StackOverflow.Infrastructure.Services
 
         public CommentBO GetCommentById(int id)
         {
-            throw new NotImplementedException();
+            var commentEntity = _stackOverflowUnitOfWork.CommentRepository.
+                Get(x => x.Id == id, "ApplicationUser,Post").FirstOrDefault();
+
+            if (commentEntity is null)
+                throw new InvalidOperationException("Comment with this id not found.");
+
+            var comment = _mapper.Map<CommentBO>(commentEntity);
+            return comment;
         }
     }
 }
