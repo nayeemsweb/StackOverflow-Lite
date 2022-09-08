@@ -127,7 +127,7 @@ namespace StackOverflow.Web.Data.Migrations
                         {
                             Id = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e99a3b69-9007-4d1d-ad98-5b6b64a29c97",
+                            ConcurrencyStamp = "a46291fb-6cf2-4149-ba06-1e300650461c",
                             DisplayName = "Nayeem Rahman",
                             Email = "nayeemrahman@gmail.com",
                             EmailConfirmed = true,
@@ -135,7 +135,7 @@ namespace StackOverflow.Web.Data.Migrations
                             NormalizedEmail = "NAYEEMRAHMAN@GMAIL.COM",
                             PasswordHash = "123456",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "98483057-8564-41ad-96a7-1d913758b906",
+                            SecurityStamp = "291156f5-6039-40d1-a69a-4d06c8b21c77",
                             TwoFactorEnabled = false
                         });
                 });
@@ -171,7 +171,7 @@ namespace StackOverflow.Web.Data.Migrations
                         new
                         {
                             Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
-                            ConcurrencyStamp = "637981056532536444",
+                            ConcurrencyStamp = "637982783684665655",
                             Name = "User",
                             NormalizedName = "USER"
                         });

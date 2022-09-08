@@ -4,6 +4,7 @@ using StackOverflow.Infrastructure.Entities.Membership;
 using PostEntity = StackOverflow.Infrastructure.Entities.Post;
 using CommentEntity = StackOverflow.Infrastructure.Entities.Comment;
 using VoteEntity = StackOverflow.Infrastructure.Entities.Vote;
+using TagEntity = StackOverflow.Infrastructure.Entities.Tag;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace StackOverflow.Infrastructure.Profiles
             CreateMap<Post, PostEntity>().ReverseMap();
             CreateMap<Comment, CommentEntity>().ReverseMap();
             CreateMap<Vote, VoteEntity>().ReverseMap();
+            CreateMap<Tag, TagEntity>().ReverseMap();
         }
     }
 }

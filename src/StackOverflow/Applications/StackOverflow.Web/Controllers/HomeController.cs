@@ -26,6 +26,41 @@ namespace StackOverflow.Web.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> PostDetails(int id)
+        {
+            var model = _scope.Resolve<PostDetailsModel>();
+            model.ResolveDependency(_scope);
+            await model.GetPostDetails(id);
+            return View(model);
+        }
+
+        public async Task<IActionResult> UpdateComment(int id)
+        {
+            var model = _scope.Resolve<UpdateCommentModel>();
+            model.ResolveDependency(_scope);
+            model.LoadData(id);
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateComment(UpdateCommentModel model)
+        {
+            model.ResolveDependency(_scope);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await model.UpdateComment();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, ex.Message);
+                }
+            }
+            return View(model);
+        }
+
         public IActionResult Privacy()
         {
             return View();

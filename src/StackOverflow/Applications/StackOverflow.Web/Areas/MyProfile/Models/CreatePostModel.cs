@@ -5,6 +5,7 @@ using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
 using StackOverflow.Web.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 
 namespace StackOverflow.Web.Areas.MyProfile.Models
 {
@@ -34,29 +35,48 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
 
         public async Task CreatePost()
         {
+            var data = JsonSerializer.Deserialize<List<Value>>(Tag);
             await GetUserInfoAsync();
             var post = new Post
             {
                 Title = Title,
                 Description = Description,
+                CreatedAt = CreatedAt,
                 UserId = UserInfo!.Id
             };
+
+            var tags = new List<Tag>();
+            foreach (var tag in data)
+            {
+                tags.Add(new Tag { Name = tag.value });
+            }
+            post.Tags = tags;
             _postService.CreatePost(post);
         }
 
         public int Id { get; set; }
 
+        [Required]
         [StringLength(150, ErrorMessage = "Title can't be more than 150 characters.")]
         [DataType(DataType.Text)]
         public string? Title { get; set; }
 
+        [Required]
         [StringLength(2000, ErrorMessage = "Description can't be more than 2000 characters.")]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Text)]
         public string? Description { get; set; }
-        //public string? Tag { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        public string Tag { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
         public Guid? UserId { get; set; }
     }
+}
+
+public class Value
+{
+    public string value { get; set; }
 }

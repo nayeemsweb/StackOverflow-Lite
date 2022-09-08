@@ -1,19 +1,27 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StackOverflow.Infrastructure.Entities.Membership;
 using StackOverflow.Web.Areas.MyProfile.Models;
+using System.Text.Json;
 
 namespace StackOverflow.Web.Areas.MyProfile.Controllers
 {
+    [Authorize()]
     [Area("MyProfile")]
     public class PostController : Controller
     {
         private readonly ILifetimeScope _scope;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<PostController> _logger;
 
         public PostController(ILogger<PostController> logger, 
-            ILifetimeScope scope)
+            ILifetimeScope scope,
+            UserManager<ApplicationUser> userManager)
         {
             _scope = scope;
+            _userManager = userManager;
             _logger = logger;
         }
         
@@ -36,6 +44,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Controllers
         public async Task<IActionResult> Create(CreatePostModel model)
         {
             model.ResolveDependency(_scope);
+
             if (ModelState.IsValid)
             {
                 try

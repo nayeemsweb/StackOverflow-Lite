@@ -60,6 +60,11 @@ namespace StackOverflow.Infrastructure.DbContexts
                 .HasForeignKey(fk => fk.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Post>()
+               .HasMany(m => m.Tags)
+               .WithOne(k => k.Post)
+               .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Comment>()
                 .HasOne(c => c.ApplicationUser)
                 .WithMany(d => d.Comments)

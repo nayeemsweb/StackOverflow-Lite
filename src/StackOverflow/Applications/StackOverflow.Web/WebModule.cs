@@ -9,6 +9,8 @@ public class WebModule : Module
     {
         //Home Models 
         builder.RegisterType<AllPostModel>().AsSelf();
+        builder.RegisterType<PostDetailsModel>().AsSelf();
+        builder.RegisterType<UpdateCommentModel>().AsSelf();
 
         //Account Models
         builder.RegisterType<RegisterModel>().AsSelf();
@@ -20,9 +22,7 @@ public class WebModule : Module
         builder.RegisterType<ListPostModel>().AsSelf();
 
         //Comment Models
-        builder.RegisterType<CreateCommentModel>().AsSelf();
-        builder.RegisterType<UpdateCommentModel>().AsSelf();
-        builder.RegisterType<ListCommentModel>().AsSelf();
+        builder.RegisterType<CreateCommentModel>().AsSelf();        
 
         base.Load(builder);
     }

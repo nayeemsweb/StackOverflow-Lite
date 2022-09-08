@@ -3,13 +3,14 @@ using AutoMapper;
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace StackOverflow.Web.Models
 {
-	public class AllPostModel : BaseModel
+	public class PostDetailsModel : BaseModel
 	{
         private IPostService _postService;
-        public AllPostModel(IPostService postService,
+        public PostDetailsModel(IPostService postService,
             UserManager userManager,
             HttpContextAccessor httpContextAccessor,
             IMapper mapper)
@@ -18,7 +19,7 @@ namespace StackOverflow.Web.Models
             _postService = postService;
         }
 
-        public AllPostModel()
+        public PostDetailsModel()
         {
 
         }
@@ -31,10 +32,18 @@ namespace StackOverflow.Web.Models
             base.ResolveDependency(scope);
         }
 
-        public IList<Post> Posts { get; set; }
-        public async Task GetPosts()
+        public Post Post { get; set; }
+
+        [StringLength(2000, ErrorMessage = "Description can't be more than 2000 characters.")]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+        public async Task GetPostDetails(int id)
         {
-            Posts = (_postService.GetPosts(1, 100, null, "CreatedAt DESC")).records;
+            var post = new Post()
+            {
+                Id = id
+            };
+            Post = _postService.GetPostById(post.Id);
         }
     }
 }

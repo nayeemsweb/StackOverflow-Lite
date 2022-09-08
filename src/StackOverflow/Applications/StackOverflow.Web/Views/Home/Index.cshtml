@@ -1,6 +1,6 @@
 ﻿@model AllPostModel
 @{
-    ViewData["Title"] = "Home";
+	ViewData["Title"] = "Home";
 }
 
 @section BannerArea
@@ -33,7 +33,7 @@
 					<div class="single-qa-box like-dislike">
 						<div class="d-flex">
 							<div class="link-unlike flex-shrink-0">
-								<a href="user.html">
+								<a>
 									<img src="~/pify/assets/images/user/user-1.jpg" alt="Image">
 								</a>
 
@@ -55,21 +55,29 @@
 							<div class="flex-grow-1 ms-3">
 								<ul class="graphic-design">
 									<li>
-										<a href="user.html">@post.ApplicationUser.DisplayName</a>
+										<a>@post.ApplicationUser.DisplayName</a>
 									</li>
 									<li>
 										<span>Created At: @post.CreatedAt</span>
 									</li>
 									<li>
 										<span>In:</span>
-										<a href="tags.html" class="graphic">
+										<a class="graphic">
 											Graphic design
 										</a>
 									</li>
+									<li class="reports float-right" style="visibility:visible">
+										<a class="report" style="font-size:14px !important;font-weight:400;" asp-area="MyProfile" asp-controller="Post"
+									   asp-action="Update" asp-route-id="@post.Id" asp-return-url="/MyProfile/Post/Update/{@post.Id}">
+											<i class="ri-error-warning-line"></i>
+											Edit
+										</a>
+									</li>
+									
 								</ul>
 
 								<h3>
-									<a href="">
+									<a asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-id="@post.Id">
 										@post.Title
 									</a>
 								</h3>
@@ -77,15 +85,15 @@
 								@Html.Raw(post.Description)
 
 								<ul class="tag-list">
-									<li>
-										<a href="tags.html">Discussion</a>
-									</li>
-									<li>
-										<a href="tags.html">Photoshop</a>
-									</li>
-									<li>
-										<a href="tags.html">Analytics</a>
-									</li>
+									@if(post.Tags is not null)
+									{
+										@foreach (var tag in post.Tags)
+										{
+											<li>
+												<a>@tag.Name</a>
+											</li>
+										}
+									}
 								</ul>
 
 								<div class="d-flex justify-content-between align-items-center">
@@ -103,13 +111,18 @@
 											</a>
 										</li>
 										<li>
-											<a href="most-answered.html">
-												2 Answer
-											</a>
+											@if (@post.Comments is null)
+											{
+												<a>0 Answer</a>
+											}
+											else
+											{
+												<a>@post.Comments.Count Answers</a>
+											}
 										</li>
 									</ul>
 
-									<a href="most-answered.html" class="default-btn">
+									<a asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-id="@post.Id" class="default-btn">
 										Answer
 									</a>
 								</div>
@@ -119,14 +132,14 @@
 				}
 				
 				<div class="pagination-area text-center">
-					<a href="all-queations.html" class="next page-numbers">
+					<a class="next page-numbers">
 						<i class="ri-arrow-left-line"></i>
 					</a>
 					<span class="page-numbers current" aria-current="page">1</span>
-					<a href="all-queations.html" class="page-numbers">2</a>
-					<a href="all-queations.html" class="page-numbers">3</a>
+					<a class="page-numbers">2</a>
+					<a class="page-numbers">3</a>
 										
-					<a href="all-queations.html" class="next page-numbers">
+					<a class="next page-numbers">
 						<i class="ri-arrow-right-line"></i>
 					</a>
 				</div>

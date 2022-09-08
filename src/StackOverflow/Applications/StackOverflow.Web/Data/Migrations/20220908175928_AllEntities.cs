@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StackOverflow.Web.Data.Migrations
 {
-    public partial class OtherEntities : Migration
+    public partial class AllEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -252,12 +252,12 @@ namespace StackOverflow.Web.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "637981056532536444", "User", "USER" });
+                values: new object[] { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "637982783684665655", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DisplayName", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "e99a3b69-9007-4d1d-ad98-5b6b64a29c97", "Nayeem Rahman", "nayeemrahman@gmail.com", true, false, null, "NAYEEMRAHMAN@GMAIL.COM", null, "123456", null, false, "98483057-8564-41ad-96a7-1d913758b906", false, null });
+                values: new object[] { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "a46291fb-6cf2-4149-ba06-1e300650461c", "Nayeem Rahman", "nayeemrahman@gmail.com", true, false, null, "NAYEEMRAHMAN@GMAIL.COM", null, "123456", null, false, "291156f5-6039-40d1-a69a-4d06c8b21c77", false, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

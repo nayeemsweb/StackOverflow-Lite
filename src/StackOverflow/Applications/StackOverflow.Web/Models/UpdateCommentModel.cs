@@ -3,27 +3,27 @@ using AutoMapper;
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
-using StackOverflow.Web.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace StackOverflow.Web.Areas.MyProfile.Models
+namespace StackOverflow.Web.Models
 {
-	public class CreateCommentModel : BaseModel
+	public class UpdateCommentModel : BaseModel
 	{
-        private ICommentService _commentService;
-        public CreateCommentModel(ICommentService commentService,
-            UserManager userManager,
+		private ICommentService _commentService;
+
+		public UpdateCommentModel(ICommentService commentService,
+			UserManager userManager,
             HttpContextAccessor httpContextAccessor,
             IMapper mapper)
-            : base(userManager, httpContextAccessor, mapper)
-        {
-            _commentService = commentService;
-        }
+			: base(userManager, httpContextAccessor, mapper)
+		{
+			_commentService = commentService;
+		}
 
-        public CreateCommentModel()
-        {
+		public UpdateCommentModel()
+		{
 
-        }
+		}
 
         public override void ResolveDependency(ILifetimeScope scope)
         {
@@ -33,17 +33,27 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             base.ResolveDependency(scope);
         }
 
-        public async Task CreateComment()
+        public async Task UpdateComment()
         {
+
             await GetUserInfoAsync();
             var comment = new Comment
             {
+                Id = Id,
                 Description = Description,
-                CreatedAt = DateTimeOffset.Now,
                 UserId = UserInfo!.Id,
                 PostId = PostId
             };
-            _commentService.CreateComment(comment);
+            _commentService.UpdateComment(comment);
+        }
+
+        public void LoadData(int id)
+        {
+            var data = _commentService.GetCommentById(id);
+            
+            Description = data.Description;
+            UserId = data.UserId;
+            PostId = data.PostId;
         }
 
         public int Id { get; set; }
@@ -57,5 +67,6 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
 
         public int PostId { get; set; }
+        public Guid? UserId { get; set; }
     }
 }
