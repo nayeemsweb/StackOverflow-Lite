@@ -12,8 +12,8 @@ using StackOverflow.Infrastructure.DbContexts;
 namespace StackOverflow.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220907210238_IdentityTables")]
-    partial class IdentityTables
+    [Migration("20220908175928_AllEntities")]
+    partial class AllEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -129,7 +129,7 @@ namespace StackOverflow.Web.Data.Migrations
                         {
                             Id = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e1e06482-d204-4efa-8591-1d727a338214",
+                            ConcurrencyStamp = "a46291fb-6cf2-4149-ba06-1e300650461c",
                             DisplayName = "Nayeem Rahman",
                             Email = "nayeemrahman@gmail.com",
                             EmailConfirmed = true,
@@ -137,7 +137,7 @@ namespace StackOverflow.Web.Data.Migrations
                             NormalizedEmail = "NAYEEMRAHMAN@GMAIL.COM",
                             PasswordHash = "123456",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b32a55b5-896b-4d9e-9d44-1e801e9451ef",
+                            SecurityStamp = "291156f5-6039-40d1-a69a-4d06c8b21c77",
                             TwoFactorEnabled = false
                         });
                 });
@@ -173,7 +173,7 @@ namespace StackOverflow.Web.Data.Migrations
                         new
                         {
                             Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
-                            ConcurrencyStamp = "637982029583843955",
+                            ConcurrencyStamp = "637982783684665655",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -327,7 +327,7 @@ namespace StackOverflow.Web.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PostId")
+                    b.Property<int>("PostId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -446,9 +446,13 @@ namespace StackOverflow.Web.Data.Migrations
 
             modelBuilder.Entity("StackOverflow.Infrastructure.Entities.Tag", b =>
                 {
-                    b.HasOne("StackOverflow.Infrastructure.Entities.Post", null)
+                    b.HasOne("StackOverflow.Infrastructure.Entities.Post", "Post")
                         .WithMany("Tags")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("StackOverflow.Infrastructure.Entities.Vote", b =>
