@@ -33,7 +33,7 @@
 					<div class="single-qa-box like-dislike">
 						<div class="d-flex">
 							<div class="link-unlike flex-shrink-0">
-								<a href="user.html">
+								<a>
 									<img src="~/pify/assets/images/user/user-1.jpg" alt="Image">
 								</a>
 
@@ -62,7 +62,7 @@
 									</li>
 									<li>
 										<span>In:</span>
-										<a href="tags.html" class="graphic">
+										<a class="graphic">
 											Graphic design
 										</a>
 									</li>
@@ -111,9 +111,14 @@
 											</a>
 										</li>
 										<li>
-											<a href="most-answered.html">
-												2 Answer
-											</a>
+											@if (@post.Comments is null)
+											{
+												<a>0 Answer</a>
+											}
+											else
+											{
+												<a>@post.Comments.Count Answers</a>
+											}
 										</li>
 									</ul>
 
@@ -127,14 +132,14 @@
 				}
 				
 				<div class="pagination-area text-center">
-					<a href="all-queations.html" class="next page-numbers">
+					<a class="next page-numbers">
 						<i class="ri-arrow-left-line"></i>
 					</a>
 					<span class="page-numbers current" aria-current="page">1</span>
-					<a href="all-queations.html" class="page-numbers">2</a>
-					<a href="all-queations.html" class="page-numbers">3</a>
+					<a class="page-numbers">2</a>
+					<a class="page-numbers">3</a>
 										
-					<a href="all-queations.html" class="next page-numbers">
+					<a class="next page-numbers">
 						<i class="ri-arrow-right-line"></i>
 					</a>
 				</div>

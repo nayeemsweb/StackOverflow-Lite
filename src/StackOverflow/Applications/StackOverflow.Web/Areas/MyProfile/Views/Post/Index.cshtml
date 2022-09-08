@@ -4,11 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*@section Styles
-{
-	<partial name="_BannerHidePartial" />
-}*@
-
 <div>
     <h1 class="offset-lg-1 col-lg-10 text-center">Your Questions</h1>
 </div>
@@ -37,7 +32,7 @@
                     <div class="single-qa-box like-dislike">
                         <div class="d-flex">
                             <div class="link-unlike flex-shrink-0">
-                                <a href="user.html">
+                                <a>
                                     <img src="~/pify/assets/images/user/user-1.jpg" alt="Image">
                                 </a>
 
@@ -67,7 +62,7 @@
                                 </ul>
 
                                 <h3>
-                                    <a href="">
+                                    <a asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-id="@post.Id">
                                         @post.Title
                                     </a>
                                 </h3>
@@ -101,7 +96,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="most-answered.html">
+                                            <a>
                                                 2 Answer
                                             </a>
                                         </li>
@@ -129,9 +124,9 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete?</h5>
 
-                                    <input id="deleteId" value="" name="id" />
+                                    <input type="hidden" id="deleteId" value="" name="id" />
 
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
@@ -173,7 +168,7 @@
     <script>
         function deletePost(id) {
             var modal = $("#exampleModal");
-            modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+            modal.find('.modal-body p').text('You wont be able to revert this!');
             $("#deleteId").val(id);
             $("#deleteForm").attr("action", "/MyProfile/Post/Delete");
             modal.modal('show');
@@ -182,18 +177,4 @@
             $("#deleteForm").submit();
         });
     </script>
-    @*	<script>
-		$('#exampleModal').on('click', '.show-bs-modal', function (event) {
-			var postId = $(this).data("id");
-			console.log(postId);
-			var modal = $("#modal-default");
-			modal.find('.modal-body p').text('Are you sure you want to delete this record?');
-			$("#deleteId").val(postId);
-			$("#deleteForm").attr("action", "/MyProfile/Post/Delete");
-			modal.modal('show');
-		});
-		$("#deleteButton").click(function () {
-			$("#deleteForm").submit();
-		});
-	</script>*@
     }

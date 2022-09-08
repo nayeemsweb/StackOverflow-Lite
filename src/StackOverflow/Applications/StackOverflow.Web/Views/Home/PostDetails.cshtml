@@ -74,7 +74,7 @@
                             </ul>
 
                             <h3>
-                                <a href="queations-details.html">
+                                <a asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-id="@Model.Post.Id">
                                     @Model.Post.Title
                                 </a>
                             </h3>
@@ -100,9 +100,14 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="most-answered.html">
-                                            2 Answer
-                                        </a>
+                                        @if (@Model.Post.Comments is null)
+                                        {
+                                            <a>0 Answer</a>
+                                        }
+                                        else
+                                        {
+                                            <a>@Model.Post.Comments.Count Answers</a>
+                                        }
                                     </li>
                                 </ul>
 
