@@ -39,6 +39,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             var comment = new Comment
             {
                 Description = Description,
+                CreatedAt = DateTimeOffset.Now,
                 UserId = UserInfo!.Id,
                 PostId = PostId
             };

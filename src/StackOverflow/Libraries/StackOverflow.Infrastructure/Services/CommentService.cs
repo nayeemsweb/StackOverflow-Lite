@@ -41,7 +41,8 @@ namespace StackOverflow.Infrastructure.Services
             if (commentEntity is null)
                 throw new InvalidOperationException("No comment found.");
 
-            _mapper.Map(comment, commentEntity);
+            //_mapper.Map(comment, commentEntity);
+            commentEntity.Description = comment.Description;
             _stackOverflowUnitOfWork.Save();
         }
 

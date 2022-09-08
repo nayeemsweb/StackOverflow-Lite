@@ -41,6 +41,7 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
             {
                 Title = Title,
                 Description = Description,
+                CreatedAt = CreatedAt,
                 UserId = UserInfo!.Id
             };
 

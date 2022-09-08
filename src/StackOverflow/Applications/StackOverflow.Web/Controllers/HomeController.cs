@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
-using StackOverflow.Web.Areas.MyProfile.Models;
 using StackOverflow.Web.Models;
 using System.Diagnostics;
 
