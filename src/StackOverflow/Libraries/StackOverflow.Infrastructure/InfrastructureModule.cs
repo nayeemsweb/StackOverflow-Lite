@@ -47,6 +47,13 @@ namespace StackOverflow.Infrastructure
             builder.RegisterType<CommentService>().As<ICommentService>()
                 .InstancePerLifetimeScope();
 
+            //Vote
+            builder.RegisterType<VoteRepository>().As<IVoteRepository>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<VoteService>().As<IVoteService>()
+                .InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

@@ -38,14 +38,17 @@
 								</a>
 
 								<div class="donet-like-list">
-									<button class="like-unlink-count like">
-										<i class="ri-thumb-up-fill"></i>
-										<span>50</span>
-									</button>
+									<form method="post" asp-area="" asp-controller="Home" asp-action="PostVoteUp"
+										asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" asp-route-id="@post.Id">
+										<button class="like-unlink-count like" type="submit">
+											<i class="ri-thumb-up-fill"></i>
+											<span>@post.Votes.Count</span>
+										</button>
+									</form>
 								</div>
 
 								<div class="donet-like-list">
-									<button class="like-unlink-count dislike">
+									<button class="like-unlink-count dislike" asp-area="" asp-controller="Home" asp-action="PostVoteDown">
 										<i class="ri-thumb-down-fill"></i>
 										<span>25</span>
 									</button>
