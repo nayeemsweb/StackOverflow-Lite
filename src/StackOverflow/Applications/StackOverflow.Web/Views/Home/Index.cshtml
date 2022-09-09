@@ -3,6 +3,10 @@
 	ViewData["Title"] = "Home";
 }
 
+@{
+	await Model.GetUserInfoAsync();
+}
+
 @section BannerArea
 {
 	<partial name="_BannerPartial" />
@@ -67,13 +71,16 @@
 											Graphic design
 										</a>
 									</li>
-									<li class="reports float-right" style="visibility:visible">
-										<a class="report" style="font-size:14px !important;font-weight:400;" asp-area="MyProfile" asp-controller="Post"
+									@if (Model.UserInfo.Id == post.UserId)
+									{
+										<li class="reports float-right" style="visibility:visible">
+											<a class="report" style="font-size:14px !important;font-weight:400;" asp-area="MyProfile" asp-controller="Post"
 									   asp-action="Update" asp-route-id="@post.Id" asp-return-url="/MyProfile/Post/Update/{@post.Id}">
-											<i class="ri-error-warning-line"></i>
-											Edit
-										</a>
-									</li>
+												<i class="ri-error-warning-line"></i>
+												Edit
+											</a>
+										</li>
+									}
 									
 								</ul>
 

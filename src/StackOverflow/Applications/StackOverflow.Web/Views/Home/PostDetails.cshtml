@@ -1,5 +1,8 @@
 ﻿@model PostDetailsModel
 @{
+    await Model.GetUserInfoAsync();
+}
+@{
     ViewData["Title"] = "PostDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -174,6 +177,9 @@
                                 <li>
                                     <span>Commented At: @comment.CreatedAt</span>
                                 </li>
+
+                                @if (Model.UserInfo.Id == comment.UserId)
+                                {
                                 <li class="reports">
                                     <a class="report" asp-area="" asp-controller="Home"
 									   asp-action="UpdateComment" asp-route-id="@comment.Id">
@@ -181,6 +187,28 @@
                                         Edit
                                     </a>
                                 </li>
+                                }
+                                @if (Model.UserInfo.Id == comment.UserId)
+                                {
+                                    @if (comment.IsAcceptedAsAnswer == false)
+                                    {
+                                        <li class="">
+                                            <a class="align-items-end d-block btn btn-light border-dark" asp-area="" asp-controller="Home"
+                                   asp-action="CommentApprove" asp-route-id="@comment.Id">
+                                                Approve this Answer
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="">
+                                            <a class="align-items-end d-block btn btn-light border-dark" asp-area="" asp-controller="Home"
+                                   asp-action="CommentDisapprove" asp-route-id="@comment.Id">
+                                                Approved
+                                            </a>
+                                        </li>
+                                    }
+                                }
                             </ul>
                             @Html.Raw(comment.Description)
                         </div>
@@ -217,7 +245,9 @@
 
     <script>
         $(document).ready(function () {
-            $('#summernote').summernote();
+            $('#summernote').summernote({
+                height: 150
+            });
         });
     </script>
 }

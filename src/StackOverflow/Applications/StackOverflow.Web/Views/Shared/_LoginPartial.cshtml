@@ -5,6 +5,9 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    @{
+
+    }
     <li>
         <a class="d-flex text-white active" asp-area="MyProfile" asp-controller="Post" asp-action="Index" title="My Profile">
             Hello @User.Identity.Name

@@ -9,5 +9,7 @@ namespace StackOverflow.Infrastructure.Services
         void DeleteComment(int id);
         public IList<Comment> GetAllCommentsByPostId(int id);
         Comment GetCommentById(int id);
+        int CommentApprove(int id);
+        int CommentDisapprove(int id);
     }
 }
