@@ -4,63 +4,20 @@ Minimalistic version of Stack Overflow website. Users can post
 questions, answer them and also can vote others’ answers. Besides 
 questioner can also mark as accepted one correct answer.
 
-<div align="center" style="display: flex; justify-content: center"> 
+<div align="center" style="justify-content:center"> 
     
 [comment]: <> (Develop Build Checking)
-<img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/nayeemsweb/StackOverflow-Lite/.NET/develop?style=for-the-badge" style="margin-left: 10px;margin-right: 10px">
+<img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/nayeemsweb/StackOverflow-Lite/.NET/develop?style=for-the-badge" style="margin-left: 10px;margin-right: 10px;float: left">
 
 [comment]: <> (Issues Closed)
-<img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/nayeemsweb/StackOverflow-Lite?color=%23ee5253&style=for-the-badge">
+<img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/nayeemsweb/StackOverflow-Lite?color=%23ee5253&style=for-the-badge" style="margin-left: 10px;margin-right: 10px;float: right">
 
 </div>
 
 ## Demo
 
-![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/Home.png?raw=true)
+![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/develop/docs/readme/Home.png?raw=true)
 
-<details>
-    <summary>Login</summary>
-  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/Login.png?raw=true)
-     
-</details>
-
-<details>
-    <summary>Register</summary>
-  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/Register.png?raw=true) 
-     
-</details>
-
-<details>
-    <summary>Create Question</summary>
-  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/CreateQuestion.png?raw=true)
-  
-     
-</details>
-<details>
-    <summary>Update Question</summary>
-    ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/UpdateQuestion.png?raw=true)
-     
-</details>
-
-<details>
-    <summary>Question Details</summary>
-    ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/PostDetails.png?raw=true)
-     
-</details>
-
-<details>
-    <summary>Delete Question</summary>
-  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/DeleteQuestion.png?raw=true)
-  
-     
-</details>
-
-<details>
-    <summary>Update Answer</summary>
-  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/UpdateAnswer.png?raw=true)
-  
-     
-</details>
 
 </br>
 
