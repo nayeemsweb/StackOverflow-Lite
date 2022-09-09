@@ -16,8 +16,53 @@ questioner can also mark as accepted one correct answer.
 
 ## Demo
 
+![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/Home.png?raw=true)
 
+<details>
+    <summary>Login</summary>
+  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/Login.png?raw=true)
+     
+</details>
 
+<details>
+    <summary>Register</summary>
+  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/Register.png?raw=true) 
+     
+</details>
+
+<details>
+    <summary>Create Question</summary>
+  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/CreateQuestion.png?raw=true)
+  
+     
+</details>
+<details>
+    <summary>Update Question</summary>
+    ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/UpdateQuestion.png?raw=true)
+     
+</details>
+
+<details>
+    <summary>Question Details</summary>
+    ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/PostDetails.png?raw=true)
+     
+</details>
+
+<details>
+    <summary>Delete Question</summary>
+  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/DeleteQuestion.png?raw=true)
+  
+     
+</details>
+
+<details>
+    <summary>Update Answer</summary>
+  ![Stack Overflow](https://github.com/nayeemsweb/StackOverflow-Lite/blob/main/docs/readme/UpdateAnswer.png?raw=true)
+  
+     
+</details>
+
+</br>
 
 ## Installation
 
