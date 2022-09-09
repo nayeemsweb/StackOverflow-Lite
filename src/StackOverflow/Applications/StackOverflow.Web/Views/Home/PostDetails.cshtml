@@ -43,17 +43,18 @@
                             </a>
 
                             <div class="donet-like-list">
-                                <button class="like-unlink-count like">
+                                <a class="like-unlink-count like" asp-area="" asp-controller="Home" 
+									asp-action="PostVoteUp" asp-route-id="@Model.Post.Id">
                                     <i class="ri-thumb-up-fill"></i>
-                                    <span>4974</span>
-                                </button>
+                                    <span>@Model.Post.Comments.Count</span>
+                                </a>
                             </div>
 
                             <div class="donet-like-list">
-                                <button class="like-unlink-count dislike">
+                                <a class="like-unlink-count dislike" asp-area="" asp-controller="Home" 
+									asp-action="PostVoteDown" asp-route-id="@Model.Post.Id">
                                     <i class="ri-thumb-down-fill"></i>
-                                    <span>25</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
@@ -150,17 +151,18 @@
                             </a>
 
                             <div class="donet-like-list">
-                                <button class="like-unlink-count like">
+                                <a class="like-unlink-count like" asp-area="" asp-controller="Home"
+                                asp-action="CommentVoteUp" asp-route-id="@comment.Id">
                                     <i class="ri-thumb-up-fill"></i>
-                                    <span>197</span>
-                                </button>
+                                    <span>@comment.Votes.Count</span>
+                                </a>
                             </div>
 
                             <div class="donet-like-list">
-                                <button class="like-unlink-count dislike">
+                                <a class="like-unlink-count dislike" asp-area="" asp-controller="Home"
+                                asp-action="CommentVoteDown" asp-route-id="@comment.Id">
                                     <i class="ri-thumb-down-fill"></i>
-                                    <span>2</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 

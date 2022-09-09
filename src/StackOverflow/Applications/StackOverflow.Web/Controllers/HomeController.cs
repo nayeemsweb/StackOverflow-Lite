@@ -82,23 +82,25 @@ namespace StackOverflow.Web.Controllers
             var model = _scope.Resolve<VoteModel>();
             model.ResolveDependency(_scope);
             await model.PostVoteUp(id);
-            return RedirectToAction("PostDetails", "Home", new { area = "", id = id });
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
         }
 
         [Authorize]
         public async Task<IActionResult> PostVoteDown(int id)
         {
             var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
             await model.PostVoteDown(id);
-            return RedirectToAction();
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
         }
 
         [Authorize]
 		public async Task<IActionResult> CommentVoteUp(int id)
         {
             var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
             await model.CommentVoteUp(id);
-            return RedirectToAction();
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
         }
 
         
@@ -106,8 +108,9 @@ namespace StackOverflow.Web.Controllers
 		public async Task<IActionResult> CommentVoteDown(int id)
         {
             var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
             await model.CommentVoteDown(id);
-            return RedirectToAction();
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
         }
     }
 }
