@@ -7,5 +7,6 @@ namespace StackOverflow.Infrastructure.UnitOfWorks
     {
         public IPostRepository PostRepository { get; set; }
         public ICommentRepository CommentRepository { get; set; }
+        public IVoteRepository VoteRepository { get; set; }
     }
 }

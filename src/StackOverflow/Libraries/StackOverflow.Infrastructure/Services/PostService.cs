@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.UnitOfWorks;
 using PostEntity = StackOverflow.Infrastructure.Entities.Post;
 using PostBO = StackOverflow.Infrastructure.BusinessObjects.Post;
