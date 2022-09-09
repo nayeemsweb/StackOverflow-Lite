@@ -4,13 +4,13 @@ Minimalistic version of Stack Overflow website. Users can post
 questions, answer them and also can vote others’ answers. Besides 
 questioner can also mark as accepted one correct answer.
 
-<div align="center" style="justify-content:center"> 
+<div align="center" style="justify-content:center;display:flex;"> 
     
 [comment]: <> (Develop Build Checking)
-<img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/nayeemsweb/StackOverflow-Lite/.NET/develop?style=for-the-badge" style="margin-left: 10px;margin-right: 10px;float: left">
+<img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/nayeemsweb/StackOverflow-Lite/.NET/develop?style=for-the-badge" style="margin-left: 10px;margin-right: 10px;">
 
 [comment]: <> (Issues Closed)
-<img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/nayeemsweb/StackOverflow-Lite?color=%23ee5253&style=for-the-badge" style="margin-left: 10px;margin-right: 10px;float: right">
+<img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/nayeemsweb/StackOverflow-Lite?color=%23ee5253&style=for-the-badge" style="margin-left: 10px;margin-right: 10px;">
 
 </div>
 
@@ -54,7 +54,6 @@ This will create a database named `StackOverflowDb` in your SQL Server
 
 ⚠️ ***Your must have `SQL Server` and* `SQL Server Management Studio` 
 installed on your machine.***
-
 
     
 ## Environment Variables
