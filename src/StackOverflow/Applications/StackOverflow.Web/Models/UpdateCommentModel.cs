@@ -56,6 +56,16 @@ namespace StackOverflow.Web.Models
             PostId = data.PostId;
         }
 
+        public int CommentApprove(int id)
+        {
+            return _commentService.CommentApprove(id);            
+        }
+
+        public int CommentDisapprove(int id)
+        {
+            return _commentService.CommentDisapprove(id);
+        }
+
         public int Id { get; set; }
 
         [Required]

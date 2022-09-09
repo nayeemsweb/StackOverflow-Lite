@@ -112,5 +112,21 @@ namespace StackOverflow.Web.Controllers
             await model.CommentVoteDown(id);
             return RedirectToAction("Index", "Home", new { area = "", id = id });
         }
+
+        public async Task<IActionResult> CommentApprove(int id)
+        {
+            var model = _scope.Resolve<UpdateCommentModel>();
+            model.ResolveDependency(_scope);
+            var approve = model.CommentApprove(id);
+            return RedirectToAction("PostDetails", "Home", new { area = "", id = approve });
+        }
+
+        public async Task<IActionResult> CommentDisapprove(int id)
+        {
+            var model = _scope.Resolve<UpdateCommentModel>();
+            model.ResolveDependency(_scope);
+            var disapprove = model.CommentDisapprove(id);
+            return RedirectToAction("PostDetails", "Home", new { area = "", id = disapprove });
+        }
     }
 }

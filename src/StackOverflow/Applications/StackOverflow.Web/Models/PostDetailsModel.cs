@@ -34,6 +34,7 @@ namespace StackOverflow.Web.Models
 
         public Post Post { get; set; }
 
+        [Required]
         [StringLength(2000, ErrorMessage = "Description can't be more than 2000 characters.")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }

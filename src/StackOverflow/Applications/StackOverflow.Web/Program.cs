@@ -13,6 +13,7 @@ using StackOverflow.Infrastructure.Profiles;
 using StackOverflow.Membership.Profiles;
 using StackOverflow.Infrastructure.Seeds;
 using StackOverflow.Infrastructure.DbContexts;
+using StackOverflow.Web.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -110,6 +111,17 @@ try
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
     }
+
+    app.Use(async (context, next) =>
+    {
+        await next();
+
+        if(context.Response.StatusCode == 404)
+        {
+            context.Request.Path = "/Invalid/Error404";
+            await next();
+        }
+    });
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();

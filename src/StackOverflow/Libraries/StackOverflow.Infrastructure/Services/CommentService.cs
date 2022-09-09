@@ -59,14 +59,44 @@ namespace StackOverflow.Infrastructure.Services
 
         public CommentBO GetCommentById(int id)
         {
-            var commentEntity = _stackOverflowUnitOfWork.CommentRepository.
-                Get(x => x.Id == id, "ApplicationUser,Post").FirstOrDefault();
+            var commentEntity = _stackOverflowUnitOfWork.CommentRepository
+                .Get(x => x.Id == id, "ApplicationUser,Post").FirstOrDefault();
 
             if (commentEntity is null)
                 throw new InvalidOperationException("Comment with this id not found.");
 
             var comment = _mapper.Map<CommentBO>(commentEntity);
             return comment;
+        }
+
+        public int CommentApprove(int id)
+        {
+            var commentEntity = _stackOverflowUnitOfWork.CommentRepository
+                .Get(x => x.Id == id, "Post").FirstOrDefault();
+
+            if (commentEntity is null)
+                throw new InvalidOperationException("Comment with this id not found.");
+
+            var postId = commentEntity.PostId;
+            commentEntity.IsAcceptedAsAnswer = true;
+            _stackOverflowUnitOfWork.Save();
+
+            return postId;
+        }
+
+        public int CommentDisapprove(int id)
+        {
+            var commentEntity = _stackOverflowUnitOfWork.CommentRepository
+                .Get(x => x.Id == id, "Post").FirstOrDefault();
+
+            if (commentEntity is null)
+                throw new InvalidOperationException("Comment with this id not found.");
+
+            var postId = commentEntity.PostId;
+            commentEntity.IsAcceptedAsAnswer = false;
+            _stackOverflowUnitOfWork.Save();
+
+            return postId;
         }
     }
 }
