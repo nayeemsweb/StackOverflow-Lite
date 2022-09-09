@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Web.Models;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace StackOverflow.Web.Controllers
 {
@@ -34,6 +36,7 @@ namespace StackOverflow.Web.Controllers
             return View(model);
         }
 
+        
         public async Task<IActionResult> UpdateComment(int id)
         {
             var model = _scope.Resolve<UpdateCommentModel>();
@@ -42,6 +45,7 @@ namespace StackOverflow.Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateComment(UpdateCommentModel model)
         {
@@ -70,6 +74,43 @@ namespace StackOverflow.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> PostVoteUp(int id)
+        {
+            var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
+            await model.PostVoteUp(id);
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> PostVoteDown(int id)
+        {
+            var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
+            await model.PostVoteDown(id);
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
+        }
+
+        [Authorize]
+		public async Task<IActionResult> CommentVoteUp(int id)
+        {
+            var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
+            await model.CommentVoteUp(id);
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
+        }
+
+        
+        [Authorize]
+		public async Task<IActionResult> CommentVoteDown(int id)
+        {
+            var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
+            await model.CommentVoteDown(id);
+            return RedirectToAction("Index", "Home", new { area = "", id = id });
         }
     }
 }

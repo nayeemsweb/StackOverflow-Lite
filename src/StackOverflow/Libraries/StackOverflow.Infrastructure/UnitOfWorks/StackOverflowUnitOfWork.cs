@@ -9,14 +9,17 @@ namespace StackOverflow.Infrastructure.UnitOfWorks
     {
        public StackOverflowUnitOfWork(IApplicationDbContext dbContext,
             IPostRepository postRepository,
-            ICommentRepository commentRepository) 
+            ICommentRepository commentRepository,
+            IVoteRepository voteRepository) 
             : base((DbContext)dbContext)
         {
             PostRepository = postRepository;
             CommentRepository = commentRepository;
+            VoteRepository = voteRepository;
         }
 
         public IPostRepository PostRepository { get; set; }
         public ICommentRepository CommentRepository { get; set; }
+        public IVoteRepository VoteRepository { get; set; }
     }
 }

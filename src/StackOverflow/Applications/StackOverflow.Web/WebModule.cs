@@ -23,6 +23,9 @@ public class WebModule : Module
 
         //Comment Models
         builder.RegisterType<CreateCommentModel>().AsSelf();        
+        
+        //Vote
+        builder.RegisterType<VoteModel>().AsSelf();
 
         base.Load(builder);
     }

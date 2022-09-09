@@ -65,10 +65,12 @@ cd StackOverflow-Lite\src\StackOverflow\Applications\StackOverflow.Web
 ```
 In this path 
 there is a file named `appsettings.json`. 
-If you face in updating the migration then configure this line 
-accordingly to your configuration - 
+If you face any issue updating the database then configure this line 
+accordingly to your machine configuration - 
 ```
-"DefaultConnection": "Server=.\\SQLEXPRESS;Database=EcommerceDb;Trusted_Connection=True;"
+"ConnectionStrings": {
+    "DefaultConnection": "Server=.\\SQLEXPRESS;Database=StackOverflowDb;Trusted_Connection=True;"
+  },
 ```
 
 You may change the `Server` value according to your configuration.
