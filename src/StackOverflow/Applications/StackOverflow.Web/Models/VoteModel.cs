@@ -32,6 +32,7 @@ namespace StackOverflow.Web.Models
             base.ResolveDependency(scope);
         }
 
+        public int Id { get; set; }
         public Guid UserId { get; set; }
         public Post? PostId { get; set; }
         public int? CommentId { get; set; }

@@ -80,8 +80,9 @@ namespace StackOverflow.Web.Controllers
         public async Task<IActionResult> PostVoteUp(int id)
         {
             var model = _scope.Resolve<VoteModel>();
+            model.ResolveDependency(_scope);
             await model.PostVoteUp(id);
-            return RedirectToAction("PostDetails", "Home", new { area = "" });
+            return RedirectToAction("PostDetails", "Home", new { area = "", id = id });
         }
 
         [Authorize]

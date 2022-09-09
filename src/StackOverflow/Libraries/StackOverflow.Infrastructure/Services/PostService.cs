@@ -59,7 +59,7 @@ namespace StackOverflow.Infrastructure.Services
         public PostBO GetPostById(int id)
         {
             var postEntity = _stackOverflowUnitOfWork.PostRepository.
-                Get(x => x.Id == id, "ApplicationUser,Comments,Comments.ApplicationUser,Tags").FirstOrDefault();
+                Get(x => x.Id == id, "ApplicationUser,Comments,Comments.ApplicationUser,Tags,Votes").FirstOrDefault();
 
             if (postEntity is null)
                 throw new InvalidOperationException("Post with this id not found.");
@@ -109,12 +109,12 @@ namespace StackOverflow.Infrastructure.Services
             GetPosts(int pageIndex, int pageSize, string searchText, string orderBy)
         {
             var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(null,
-                orderBy, "ApplicationUser,Tags", pageIndex, pageSize, true);
+                orderBy, "ApplicationUser,Tags,Votes", pageIndex, pageSize, true);
 
             if (!string.IsNullOrEmpty(searchText))
             {
                 result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.Title.Contains(searchText),
-                    orderBy, "ApplicationUser,Comments,Tags", pageIndex, pageSize, true);
+                    orderBy, "ApplicationUser,Comments,Tags,Votes", pageIndex, pageSize, true);
             }
 
             var posts = new List<PostBO>();

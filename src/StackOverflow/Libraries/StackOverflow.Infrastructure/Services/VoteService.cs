@@ -21,7 +21,7 @@ namespace StackOverflow.Infrastructure.Services
             try
             {
                 var voteEntity = _stackOverflowUnitOfWork.VoteRepository
-                    .Get(x => x.PostId == postId && x.UserId == userId, null).FirstOrDefault();
+                    .Get(x => x.PostId == postId && x.UserId == userId, string.Empty).FirstOrDefault();
                 
                 var entity = new VoteEntity();
                 if (voteEntity is null)
@@ -43,7 +43,7 @@ namespace StackOverflow.Infrastructure.Services
             try
             {
                 var voteEntity = _stackOverflowUnitOfWork.VoteRepository
-                    .Get(x => x.PostId == postId && x.UserId == userId, null).FirstOrDefault();
+                    .Get(x => x.PostId == postId && x.UserId == userId, string.Empty)).FirstOrDefault();
                 
                 if (voteEntity != null)
                     _stackOverflowUnitOfWork.VoteRepository.Remove(voteEntity);
@@ -61,7 +61,7 @@ namespace StackOverflow.Infrastructure.Services
             try
             {
                 var voteEntity = _stackOverflowUnitOfWork.VoteRepository
-                    .Get(x => x.CommentId == commentId && x.UserId == userId, null).FirstOrDefault();
+                    .Get(x => x.CommentId == commentId && x.UserId == userId, string.Empty)).FirstOrDefault();
                 
                 var entity = new VoteEntity();
                 if (voteEntity is null)
@@ -83,7 +83,7 @@ namespace StackOverflow.Infrastructure.Services
             try
             {
                 var voteEntity = _stackOverflowUnitOfWork.VoteRepository.
-                    Get(x => x.CommentId == commentId && x.UserId == userId, null).FirstOrDefault();
+                    Get(x => x.CommentId == commentId && x.UserId == userId, string.Empty)).FirstOrDefault();
                 
                 if (voteEntity != null)
                     _stackOverflowUnitOfWork.VoteRepository.Remove(voteEntity);
