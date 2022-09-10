@@ -75,7 +75,7 @@
                                     <a>@Model.Post.ApplicationUser.DisplayName</a>
                                 </li>
                                 <li>
-                                    <span>Created At: @Model.Post.CreatedAt</span>
+                                    <span>Created At: @Model.Post.CreatedAt.ToString("dddd, dd MMMM yyyy")</span>
                                 </li>
                                 <li>
                                     <span>In:</span>
@@ -91,17 +91,17 @@
                                 </a>
                             </h3>
 
-                            @Html.Raw(Model.Post.Description);
+                            @Html.Raw(Model.Post.Description)
                             <ul class="tag-list">
-                                <li>
-                                    <a>Discussion</a>
-                                </li>
-                                <li>
-                                    <a>Photoshop</a>
-                                </li>
-                                <li>
-                                    <a>Analytics</a>
-                                </li>
+                            @if (Model.Post.Tags is not null)
+                            {
+                                foreach (var tag in Model.Post.Tags)
+                                {
+                                    <li>
+                                        <a>@tag.Name</a>
+                                    </li>
+                                }
+                            }
                             </ul>
 
                             <div class="d-flex justify-content-between align-items-center">
@@ -158,7 +158,7 @@
                     <div class="d-flex">
                         <div class="link-unlike flex-shrink-0">
                             <a>
-                                <img src="~/pify/assets/images/user/user-13.jpg" alt="Image">
+                                <img src="~/pify/assets/images/user/user-1.jpg" alt="Image">
                             </a>
 
                             <div class="donet-like-list">
@@ -183,7 +183,7 @@
                                     <a>@comment.ApplicationUser.DisplayName</a>
                                 </li>
                                 <li>
-                                    <span>Commented At: @comment.CreatedAt</span>
+                                    <span>Commented At: @comment.CreatedAt.ToString("dddd, dd MMMM yyyy")</span>
                                 </li>
 
                                 @if (SignInManager.IsSignedIn(User) && Model.UserInfo.Id == comment.UserId)
@@ -191,10 +191,21 @@
                                 <li class="reports">
                                     <a class="report" asp-area="" asp-controller="Home"
 									   asp-action="UpdateComment" asp-route-id="@comment.Id">
-                                        <i class="ri-error-warning-line"></i>
+                                            <i class="ri-file-edit-line"></i>
                                         Edit
                                     </a>
                                 </li>
+                                }
+                                @if (comment.IsAcceptedAsAnswer == true)
+                                {
+                                    <li>
+                                        <h4>
+                                            <span class="badge bg-success text-white bg-opacity-75 myTooltip"
+                                          data-bs-toggle="tooltip" data-bs-placement="top" title="Questioner selected this answer as Accepted">
+                                                Accepted
+                                            </span>
+                                        </h4>
+                                    </li>
                                 }
                                 @if (SignInManager.IsSignedIn(User) && Model.Post.UserId == Model.UserInfo.Id)
                                 {
@@ -211,18 +222,13 @@
                                     {
                                         <li class="">
                                             <a class="align-items-end d-block btn btn-danger text-white" asp-area="" asp-controller="Home"
-                                   asp-action="CommentDisapprove" asp-route-id="@comment.Id">
+                                        asp-action="CommentDisapprove" asp-route-id="@comment.Id">
                                                 Disapprove
                                             </a>
                                         </li>
                                     }
                                 }
-                                @if (comment.IsAcceptedAsAnswer == true)
-                                {
-                                    <li>
-                                        <h4><span class="badge bg-secondary text-white">Approved</span></h4>
-                                    </li>
-                                }
+                                
                             </ul>
                             @Html.Raw(comment.Description)
                         </div>
@@ -262,6 +268,13 @@
             $('#summernote').summernote({
                 height: 150
             });
+        });
+    </script>
+
+    <script>
+        const tooltips = document.querySelectorAll('.myTooltip')
+        tooltips.forEach(t => {
+            new bootstrap.Tooltip(t)
         });
     </script>
 }
