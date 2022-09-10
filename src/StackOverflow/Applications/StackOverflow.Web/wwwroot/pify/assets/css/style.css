@@ -5506,3 +5506,25 @@ Page-navigation Area Style*/
     background-color: #f48225;
     border-color: #f48225;
 }
+
+.bg-orange {
+    background-color: #f48225 !important;
+    font-size: 14px;
+    color: #ffffff;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: -ms-inline-grid;
+    display: inline-grid;
+    padding: 8px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bg-orange:hover {
+    color: #ffffff !important;
+    background-color: #0c0d0e !important;
+}

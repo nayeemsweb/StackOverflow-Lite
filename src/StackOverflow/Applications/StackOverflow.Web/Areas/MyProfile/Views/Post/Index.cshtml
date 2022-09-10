@@ -57,7 +57,7 @@
                                         <a href="">@post.ApplicationUser.DisplayName</a>
                                     </li>
                                     <li>
-                                        <span>Asked on: @post.CreatedAt</span>
+                                        <span>Asked on: @post.CreatedAt.ToString("dddd, dd MMMM yyyy")</span>
                                     </li>
                                 </ul>
 
@@ -70,15 +70,15 @@
                                 @Html.Raw(post.Description)
 
                                 <ul class="tag-list">
-                                    <li>
-                                        <a>Discussion</a>
-                                    </li>
-                                    <li>
-                                        <a>Photoshop</a>
-                                    </li>
-                                    <li>
-                                        <a>Analytics</a>
-                                    </li>
+                                    @if (post.Tags is not null)
+                                    {
+                                        foreach (var tag in post.Tags)
+                                        {
+                                            <li>
+                                                <a>@tag.Name</a>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
 
                                 <div class="d-flex justify-content-between align-items-center">
@@ -103,7 +103,7 @@
                                     </ul>
 
                                     <div class="d-block float-end">
-                                        <a class="default-btn" asp-area="MyProfile" asp-controller="Post" asp-action="Update"
+                                        <a class="bg-orange" asp-area="MyProfile" asp-controller="Post" asp-action="Update"
                                        asp-route-id="@post.Id">
                                             Edit
                                         </a>
