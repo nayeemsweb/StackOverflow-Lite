@@ -178,7 +178,7 @@
                         </div>
 
                         <div class="flex-grow-1 ms-3">
-                            <ul class="latest-answer-list d-flex">
+                            <ul class="latest-answer-list">
                                 <li>
                                     <a>@comment.ApplicationUser.DisplayName</a>
                                 </li>
@@ -212,7 +212,7 @@
                                     @if (comment.IsAcceptedAsAnswer == false)
                                     {
                                         <li class="">
-                                            <a class="align-items-end d-inline-block myTooltip default-btn"
+                                            <a class="border btn btn-light btn-sm myTooltip"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Click to set this answer as Accepted"
                                             asp-area="" asp-controller="Home" asp-action="CommentApprove" asp-route-id="@comment.Id">
                                                 Approve this Answer
@@ -222,7 +222,7 @@
                                     else
                                     {
                                         <li class="">
-                                            <a class="align-items-end d-block btn btn-danger text-white myTooltip"
+                                            <a class="border btn btn-light btn-sm myTooltip"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Click to set this answer as Not Accepted"
                                             asp-area="" asp-controller="Home" asp-action="CommentDisapprove" asp-route-id="@comment.Id">
                                                 Disapprove
@@ -230,8 +230,8 @@
                                         </li>
                                     }
                                 }
-                                
                             </ul>
+                            
                             @Html.Raw(comment.Description)
                         </div>
                     </div>
