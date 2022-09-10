@@ -35,12 +35,12 @@ Thirdly, go to `docs` folder -
 ```
 cd StackOverflow-Lite/docs
 ```
-There you will find a batch file named `StackOverflow_Migration_Runner.bat`. 
+There you will find a batch file named **`StackOverflow_Migration_Runner.bat`**. 
 Run that batch file to update database - 
 
-Step(1): `Apply Migration` [Option 2]
+Step(1): `Apply Migration` _[option 2]_
 
-Step(2): `Update All` [Option 1]
+Step(2): `Update All` _[option 1]_
 
 or, You may manually run the `Update Database` using the following command
 in the `Project Manager Console` in Visual Studio. 
@@ -52,8 +52,8 @@ dotnet ef database update -p .\Applications\StackOverflow.Web -c ApplicationDbCo
 This will create a database named `StackOverflowDb` in your SQL Server 
 (actually SSMS) and also the table(s) accordingly.
 
-⚠️ ***Your must have `SQL Server` and* `SQL Server Management Studio` 
-installed on your machine.***
+⚠️ **Your must have `SQL Server` and `SQL Server Management Studio` 
+installed on your machine.**
 
     
 ## Environment Variables
@@ -78,19 +78,23 @@ You may change the `Server` value according to your configuration.
 
 ## Tech Stack
 
+**Frontend:** ASP.NET Web App (MVC), Bootstrap UI Templates
+
 **Backend:** ASP.NET (Core) 6,  Entity Framework (Core), Sql Server,
 Fluent API
-
-**Logger:** Serilog
-
-**Dependency Injection:** Autofac
-
-**Object-Object Mapper:** AutoMapper
 
 **Design Patterns:** Repository & Unit of Work Patterns
 
 **Architecture:** Layered Architecture - n-Tier Architecture -
 (UI, Business Logic & Data Access Layer)
+
+**Error Logger:** Serilog
+
+**Dependency Injection:** Autofac
+
+**Object-Object Mapper:** AutoMapper
+
+
 
 
 
