@@ -50,7 +50,9 @@
 
 	<script>
 		$(document).ready(function () {
-			$('#summernote').summernote();
+			$('#summernote').summernote({
+				height: 150
+			});
 		});
 	</script>
 
@@ -58,12 +60,18 @@
 		// Vanilla JavaScript
 		var input = document.getElementById("tags"),
 		tagify = new Tagify(input);
+		tagify.duplicates = false;
+		tagify.maxTags = 5;
 
-		//[name=tags]
-		$('[id=tags]').tagify({
-			duplicates : false,
-			maxTags: 5
-		});
+		//$(document).ready(function(){
+
+		//  // jQuery methods go here...
+		//	//[name=tags]
+		//	$('#tags').tagify({
+		//		duplicates: false,
+		//		maxTags: 5
+		//	});
+		//});
 
 
 	</script>
