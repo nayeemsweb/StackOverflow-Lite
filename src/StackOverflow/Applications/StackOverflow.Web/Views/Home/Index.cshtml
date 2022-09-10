@@ -1,10 +1,17 @@
 ﻿@model AllPostModel
-@{
-	ViewData["Title"] = "Home";
+@using Microsoft.AspNetCore.Identity
+@using StackOverflow.Infrastructure.Entities.Membership
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+	await Model.GetUserInfoAsync();
 }
 
 @{
-	await Model.GetUserInfoAsync();
+	ViewData["Title"] = "Home";
 }
 
 @section BannerArea
@@ -71,17 +78,16 @@
 											Graphic design
 										</a>
 									</li>
-									@if (Model.UserInfo.Id == post.UserId)
+									@if (SignInManager.IsSignedIn(User) && Model.UserInfo.Id == post.UserId)
 									{
 										<li class="reports float-right" style="visibility:visible">
-											<a class="report" style="font-size:14px !important;font-weight:400;" asp-area="MyProfile" asp-controller="Post"
-									   asp-action="Update" asp-route-id="@post.Id" asp-return-url="/MyProfile/Post/Update/{@post.Id}">
-												<i class="ri-error-warning-line"></i>
-												Edit
+											<a class="report" style="font-size:14px !important;font-weight:400;" 
+											asp-area="MyProfile" asp-controller="Post" asp-action="Update" asp-route-id="@post.Id" 
+											asp-return-url="/MyProfile/Post/Update/{@post.Id}">
+												<i class="ri-file-edit-line"></i> Edit
 											</a>
 										</li>
-									}
-									
+									}									
 								</ul>
 
 								<h3>

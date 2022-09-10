@@ -1,14 +1,22 @@
 ﻿@model PostDetailsModel
-@{
+@using Microsoft.AspNetCore.Identity
+@using StackOverflow.Infrastructure.Entities.Membership
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
     await Model.GetUserInfoAsync();
 }
+
 @{
     ViewData["Title"] = "PostDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Styles
-    {
+{
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 }
 
@@ -170,7 +178,7 @@
                         </div>
 
                         <div class="flex-grow-1 ms-3">
-                            <ul class="latest-answer-list">
+                            <ul class="latest-answer-list d-flex">
                                 <li>
                                     <a>@comment.ApplicationUser.DisplayName</a>
                                 </li>
@@ -178,7 +186,7 @@
                                     <span>Commented At: @comment.CreatedAt</span>
                                 </li>
 
-                                @if (Model.UserInfo.Id == comment.UserId)
+                                @if (SignInManager.IsSignedIn(User) && Model.UserInfo.Id == comment.UserId)
                                 {
                                 <li class="reports">
                                     <a class="report" asp-area="" asp-controller="Home"
@@ -188,13 +196,13 @@
                                     </a>
                                 </li>
                                 }
-                                @if (Model.UserInfo.Id == comment.UserId)
+                                @if (SignInManager.IsSignedIn(User) && Model.Post.UserId == Model.UserInfo.Id)
                                 {
                                     @if (comment.IsAcceptedAsAnswer == false)
                                     {
                                         <li class="">
                                             <a class="align-items-end d-block btn btn-light border-dark" asp-area="" asp-controller="Home"
-                                   asp-action="CommentApprove" asp-route-id="@comment.Id">
+                                            asp-action="CommentApprove" asp-route-id="@comment.Id">
                                                 Approve this Answer
                                             </a>
                                         </li>
@@ -202,12 +210,18 @@
                                     else
                                     {
                                         <li class="">
-                                            <a class="align-items-end d-block btn btn-light border-dark" asp-area="" asp-controller="Home"
+                                            <a class="align-items-end d-block btn btn-danger text-white" asp-area="" asp-controller="Home"
                                    asp-action="CommentDisapprove" asp-route-id="@comment.Id">
-                                                Approved
+                                                Disapprove
                                             </a>
                                         </li>
                                     }
+                                }
+                                @if (comment.IsAcceptedAsAnswer == true)
+                                {
+                                    <li>
+                                        <h4><span class="badge bg-secondary text-white">Approved</span></h4>
+                                    </li>
                                 }
                             </ul>
                             @Html.Raw(comment.Description)
