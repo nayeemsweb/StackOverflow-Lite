@@ -212,8 +212,9 @@
                                     @if (comment.IsAcceptedAsAnswer == false)
                                     {
                                         <li class="">
-                                            <a class="align-items-end d-block btn btn-light border-dark" asp-area="" asp-controller="Home"
-                                            asp-action="CommentApprove" asp-route-id="@comment.Id">
+                                            <a class="align-items-end d-inline-block myTooltip default-btn"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Click to set this answer as Accepted"
+                                            asp-area="" asp-controller="Home" asp-action="CommentApprove" asp-route-id="@comment.Id">
                                                 Approve this Answer
                                             </a>
                                         </li>
@@ -221,8 +222,9 @@
                                     else
                                     {
                                         <li class="">
-                                            <a class="align-items-end d-block btn btn-danger text-white" asp-area="" asp-controller="Home"
-                                        asp-action="CommentDisapprove" asp-route-id="@comment.Id">
+                                            <a class="align-items-end d-block btn btn-danger text-white myTooltip"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Click to set this answer as Not Accepted"
+                                            asp-area="" asp-controller="Home" asp-action="CommentDisapprove" asp-route-id="@comment.Id">
                                                 Disapprove
                                             </a>
                                         </li>
