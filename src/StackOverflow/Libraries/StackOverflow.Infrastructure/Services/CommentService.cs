@@ -41,7 +41,6 @@ namespace StackOverflow.Infrastructure.Services
             if (commentEntity is null)
                 throw new InvalidOperationException("No comment found.");
 
-            //_mapper.Map(comment, commentEntity);
             commentEntity.Description = comment.Description;
             _stackOverflowUnitOfWork.Save();
         }
@@ -50,11 +49,6 @@ namespace StackOverflow.Infrastructure.Services
         {
             _stackOverflowUnitOfWork.CommentRepository.Remove(id);
             _stackOverflowUnitOfWork.Save();
-        }
-
-        public IList<CommentBO> GetAllCommentsByPostId(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public CommentBO GetCommentById(int id)
