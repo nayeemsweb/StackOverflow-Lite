@@ -30,10 +30,24 @@ namespace StackOverflow.Web.Controllers
 
         public async Task<IActionResult> PostDetails(int id)
         {
-            var model = _scope.Resolve<PostDetailsModel>();
-            model.ResolveDependency(_scope);
-            await model.GetPostDetails(id);
-            return View(model);
+            try
+            {
+                var model = _scope.Resolve<PostDetailsModel>();
+                model.ResolveDependency(_scope);
+                await model.GetPostDetails(id);
+                if (model.Post is null)
+                {
+                    return RedirectToAction("Error404", "Invalid", new { area = "" });
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         
