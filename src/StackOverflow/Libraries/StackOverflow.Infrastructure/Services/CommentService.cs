@@ -31,66 +31,88 @@ namespace StackOverflow.Infrastructure.Services
 
         public void UpdateComment(CommentBO comment)
         {
-            if (comment == null)
+            try
             {
-                throw new ArgumentNullException("No comment string written.");
+                var commentEntity = _stackOverflowUnitOfWork.CommentRepository.GetById(comment.Id);
+                commentEntity.Description = comment.Description;
+                _stackOverflowUnitOfWork.Save();
             }
+            catch (Exception ex)
+            {
 
-            var commentEntity = _stackOverflowUnitOfWork.CommentRepository.GetById(comment.Id);
-
-            if (commentEntity is null)
-                throw new InvalidOperationException("No comment found.");
-
-            commentEntity.Description = comment.Description;
-            _stackOverflowUnitOfWork.Save();
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public void DeleteComment(int id)
         {
-            _stackOverflowUnitOfWork.CommentRepository.Remove(id);
-            _stackOverflowUnitOfWork.Save();
+            try
+            {
+                _stackOverflowUnitOfWork.CommentRepository.Remove(id);
+                _stackOverflowUnitOfWork.Save();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public CommentBO GetCommentById(int id)
         {
-            var commentEntity = _stackOverflowUnitOfWork.CommentRepository
+            try
+            {
+                var commentEntity = _stackOverflowUnitOfWork.CommentRepository
                 .Get(x => x.Id == id, "ApplicationUser,Post").FirstOrDefault();
 
-            if (commentEntity is null)
-                throw new InvalidOperationException("Comment with this id not found.");
+                var comment = _mapper.Map<CommentBO>(commentEntity);
+                return comment;
+            }
+            catch (Exception ex)
+            {
 
-            var comment = _mapper.Map<CommentBO>(commentEntity);
-            return comment;
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public int CommentApprove(int id)
         {
-            var commentEntity = _stackOverflowUnitOfWork.CommentRepository
+            try
+            {
+                var commentEntity = _stackOverflowUnitOfWork.CommentRepository
                 .Get(x => x.Id == id, "Post").FirstOrDefault();
 
-            if (commentEntity is null)
-                throw new InvalidOperationException("Comment with this id not found.");
+                var postId = commentEntity.PostId;
+                commentEntity.IsAcceptedAsAnswer = true;
+                _stackOverflowUnitOfWork.Save();
 
-            var postId = commentEntity.PostId;
-            commentEntity.IsAcceptedAsAnswer = true;
-            _stackOverflowUnitOfWork.Save();
+                return postId;
+            }
+            catch (Exception ex)
+            {
 
-            return postId;
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public int CommentDisapprove(int id)
         {
-            var commentEntity = _stackOverflowUnitOfWork.CommentRepository
+            try
+            {
+                var commentEntity = _stackOverflowUnitOfWork.CommentRepository
                 .Get(x => x.Id == id, "Post").FirstOrDefault();
 
-            if (commentEntity is null)
-                throw new InvalidOperationException("Comment with this id not found.");
+                var postId = commentEntity.PostId;
+                commentEntity.IsAcceptedAsAnswer = false;
+                _stackOverflowUnitOfWork.Save();
 
-            var postId = commentEntity.PostId;
-            commentEntity.IsAcceptedAsAnswer = false;
-            _stackOverflowUnitOfWork.Save();
+                return postId;
+            }
+            catch (Exception ex)
+            {
 
-            return postId;
+                throw new Exception(ex.Message, ex);
+            }
         }
     }
 }
