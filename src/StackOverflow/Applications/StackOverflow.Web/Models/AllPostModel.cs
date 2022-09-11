@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Infrastructure.BusinessObjects;
 using StackOverflow.Infrastructure.Services;
 using StackOverflow.Membership.Services;
@@ -32,9 +33,13 @@ namespace StackOverflow.Web.Models
         }
 
         public IList<Post> Posts { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+        
         public async Task GetPosts()
         {
-            Posts = (_postService.GetPosts(1, 100, null, "CreatedAt DESC")).records;
+            Posts = (_postService.GetPosts(1, 100, SearchTerm, "CreatedAt DESC")).records;
         }
     }
 }

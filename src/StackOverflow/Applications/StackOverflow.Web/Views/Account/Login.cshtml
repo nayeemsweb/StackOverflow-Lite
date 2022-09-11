@@ -5,10 +5,11 @@
 }
 
 <form class="user-form needs-validation" novalidate id="account" method="post" 
-	asp-area="" asp-controller="Account" asp-action="Login">
+	asp-area="" asp-controller="Account" asp-action="Login" >
 	<div class="row">
 		<h2 class="text-center">@ViewData["Title"]</h2>
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<input type="hidden" asp-for="ReturnUrl" />
 		<div class="col-12">
 			<div class="form-group">
 				<label asp-for="Email" class="form-label" for="emailValidation">Email</label>

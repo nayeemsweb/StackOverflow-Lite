@@ -37,17 +37,18 @@
                                 </a>
 
                                 <div class="donet-like-list">
-                                    <button class="like-unlink-count like">
+                                    <a class="like-unlink-count like" asp-area="" asp-controller="Home" 
+									asp-action="PostVoteUp" asp-route-id="@post.Id">
                                         <i class="ri-thumb-up-fill"></i>
-                                        <span>50</span>
-                                    </button>
+                                        <span>@post.Votes.Count</span>
+                                    </a>
                                 </div>
 
                                 <div class="donet-like-list">
-                                    <button class="like-unlink-count dislike">
+                                    <a class="like-unlink-count dislike" asp-area="" asp-controller="Home" 
+									asp-action="PostVoteDown" asp-route-id="@post.Id">
                                         <i class="ri-thumb-down-fill"></i>
-                                        <span>25</span>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 
@@ -57,7 +58,7 @@
                                         <a href="">@post.ApplicationUser.DisplayName</a>
                                     </li>
                                     <li>
-                                        <span>Asked on: @post.CreatedAt</span>
+                                        <span>Asked on: @post.CreatedAt.ToString("dddd, dd MMMM yyyy")</span>
                                     </li>
                                 </ul>
 
@@ -70,15 +71,15 @@
                                 @Html.Raw(post.Description)
 
                                 <ul class="tag-list">
-                                    <li>
-                                        <a>Discussion</a>
-                                    </li>
-                                    <li>
-                                        <a>Photoshop</a>
-                                    </li>
-                                    <li>
-                                        <a>Analytics</a>
-                                    </li>
+                                    @if (post.Tags is not null)
+                                    {
+                                        foreach (var tag in post.Tags)
+                                        {
+                                            <li>
+                                                <a>@tag.Name</a>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
 
                                 <div class="d-flex justify-content-between align-items-center">
@@ -103,7 +104,7 @@
                                     </ul>
 
                                     <div class="d-block float-end">
-                                        <a class="default-btn" asp-area="MyProfile" asp-controller="Post" asp-action="Update"
+                                        <a class="bg-orange" asp-area="MyProfile" asp-controller="Post" asp-action="Update"
                                        asp-route-id="@post.Id">
                                             Edit
                                         </a>

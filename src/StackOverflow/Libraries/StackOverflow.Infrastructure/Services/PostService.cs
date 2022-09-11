@@ -2,6 +2,7 @@
 using StackOverflow.Infrastructure.UnitOfWorks;
 using PostEntity = StackOverflow.Infrastructure.Entities.Post;
 using PostBO = StackOverflow.Infrastructure.BusinessObjects.Post;
+using System.Security.Cryptography.X509Certificates;
 
 namespace StackOverflow.Infrastructure.Services
 {
@@ -106,15 +107,15 @@ namespace StackOverflow.Infrastructure.Services
         }
 
         public (int total, int displayTotal, IList<PostBO> records)
-            GetPosts(int pageIndex, int pageSize, string searchText, string orderBy)
+            GetPosts(int pageIndex, int pageSize, string searchTerm, string orderBy)
         {
             var result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(null,
                 orderBy, "ApplicationUser,Tags,Votes", pageIndex, pageSize, true);
 
-            if (!string.IsNullOrEmpty(searchText))
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.Title.Contains(searchText),
-                    orderBy, "ApplicationUser,Comments,Tags,Votes", pageIndex, pageSize, true);
+                result = _stackOverflowUnitOfWork.PostRepository.GetDynamic(x => x.Title.Contains(searchTerm),
+                    orderBy, "ApplicationUser,Tags,Votes", pageIndex, pageSize, true);
             }
 
             var posts = new List<PostBO>();

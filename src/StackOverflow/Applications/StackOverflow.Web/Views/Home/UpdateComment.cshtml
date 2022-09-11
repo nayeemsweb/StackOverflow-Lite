@@ -43,6 +43,7 @@
 			<form class="your-answer-form" method="post" asp-antiforgery="true"
 				  asp-area="" asp-controller="Home" asp-action="UpdateComment">
 					<div asp-validation-summary="All" class="text-danger"></div>
+					<input type="hidden" name="PostId" value="@Model.PostId" />
 				<div class="form-group">
 					<h3>Your Answer</h3>
 				</div>

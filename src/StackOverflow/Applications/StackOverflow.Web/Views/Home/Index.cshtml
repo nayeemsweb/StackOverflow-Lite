@@ -1,10 +1,17 @@
 ﻿@model AllPostModel
-@{
-	ViewData["Title"] = "Home";
+@using Microsoft.AspNetCore.Identity
+@using StackOverflow.Infrastructure.Entities.Membership
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+	await Model.GetUserInfoAsync();
 }
 
 @{
-	await Model.GetUserInfoAsync();
+	ViewData["Title"] = "Home";
 }
 
 @section BannerArea
@@ -14,17 +21,20 @@
 
 <div class="offset-lg-1 col-lg-10">
 	<div class="middull-content">
-		<form class="aq-form">
+			<form class="aq-form" method="get" asp-area="" asp-controller="Home" asp-action="Index" asp-antiforgery="true">
+			<div asp-validation-summary="All" class="text-danger"></div>
 			<i class="ri-search-line"></i>
-			<input type="text" class="form-control" placeholder="Have a question? Ask or enter a search">
-			<button class="aq-btn">
-				Ask Question
+			<input type="text" asp-for="SearchTerm" 
+			class="form-control" placeholder="Have a question? Ask or enter a search">
+			<button class="aq-btn" type="submit">
+				Search
 			</button>
 		</form>
 
 		<ul class="nav nav-tabs questions-tabs d-flex justify-content-between" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<button class="nav-link active" id="recent-questions-tab" data-bs-toggle="tab" data-bs-target="#recent-questions" type="button" role="tab" aria-controls="recent-questions" aria-selected="true">
+				<button class="nav-link active" id="recent-questions-tab" 
+				data-bs-toggle="tab" data-bs-target="#recent-questions" type="button" role="tab" aria-controls="recent-questions" aria-selected="true">
 					Recent Questions
 				</button>
 			</li>
@@ -63,7 +73,7 @@
 										<a>@post.ApplicationUser.DisplayName</a>
 									</li>
 									<li>
-										<span>Created At: @post.CreatedAt</span>
+										<span>Created At: @post.CreatedAt.ToString("dddd, dd MMMM yyyy")</span>
 									</li>
 									<li>
 										<span>In:</span>
@@ -71,17 +81,16 @@
 											Graphic design
 										</a>
 									</li>
-									@if (Model.UserInfo.Id == post.UserId)
+									@if (SignInManager.IsSignedIn(User) && Model.UserInfo.Id == post.UserId)
 									{
 										<li class="reports float-right" style="visibility:visible">
-											<a class="report" style="font-size:14px !important;font-weight:400;" asp-area="MyProfile" asp-controller="Post"
-									   asp-action="Update" asp-route-id="@post.Id" asp-return-url="/MyProfile/Post/Update/{@post.Id}">
-												<i class="ri-error-warning-line"></i>
-												Edit
+											<a class="report" style="font-size:14px !important;font-weight:400;" 
+											asp-area="MyProfile" asp-controller="Post" asp-action="Update" asp-route-id="@post.Id" 
+											asp-return-url="/MyProfile/Post/Update/{@post.Id}">
+												<i class="ri-file-edit-line"></i> Edit
 											</a>
 										</li>
-									}
-									
+									}									
 								</ul>
 
 								<h3>
