@@ -54,8 +54,7 @@ namespace StackOverflow.Web.Controllers
             {
                 try
                 {
-                    await model.UpdateComment();
-                    
+                    await model.UpdateComment();                    
                     return RedirectToAction("PostDetails", "Home", new { area = "", id = model.PostId });
                 }
                 catch (Exception ex)
