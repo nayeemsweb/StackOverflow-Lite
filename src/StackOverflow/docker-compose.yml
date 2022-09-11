@@ -1,0 +1,19 @@
+version: "3"
+services:
+    web:
+        build:
+          context: .
+          dockerfile: Applications/StackOverflow.Web/Dockerfile
+        image: stackoverflow-web
+        container_name: stackoverflow_container
+        restart: unless-stopped
+        tty: true
+        env_file: 
+            - web.env
+        ports:
+            - "8000:80"
+        volumes:
+            - stackoverflow-data:/app/Logs
+volumes:
+     stackoverflow-data: 
+        external: true

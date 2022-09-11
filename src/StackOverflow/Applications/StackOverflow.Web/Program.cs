@@ -29,9 +29,14 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new MembershipModule(connectionString, assemblyName));
 });
 
+//Serilog Configuration
+builder.Host.UseSerilog((ctx, lc) => lc
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .ReadFrom.Configuration(builder.Configuration));
+
 // Add services to the container.
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -71,12 +76,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
-//Serilog Configuration
-builder.Host.UseSerilog((ctx, lc) => lc
-    .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-    .Enrich.FromLogContext()
-    .ReadFrom.Configuration(builder.Configuration));
+
 
 builder.Services.AddSession(options =>
 {
