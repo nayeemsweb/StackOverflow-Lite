@@ -35,6 +35,11 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
 
         public async Task CreatePost()
         {
+            if (IsValidPostTitle(Title))
+            {
+                throw new InvalidOperationException("Post title is invalid.");
+            }
+            
             var data = JsonSerializer.Deserialize<List<Value>>(Tag);
             await GetUserInfoAsync();
             var post = new Post
@@ -73,6 +78,16 @@ namespace StackOverflow.Web.Areas.MyProfile.Models
         [DataType(DataType.DateTime)]
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
         public Guid? UserId { get; set; }
+
+        private bool IsValidPostTitle(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                return false;
+            else if (title.Length > 150)
+                return false;
+            else
+                return true;
+        }
     }
 }
 
